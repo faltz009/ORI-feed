@@ -330,8 +330,9 @@ $("k-download").onclick = () => {
   URL.revokeObjectURL(a.href);
 };
 
-fetch("feed/feed.json").then(r => {
-  if (!r.ok) throw new Error("feed/feed.json not found — run feed.py first");
+const FEED_URL = new URLSearchParams(location.search).get("feed") || "feed/feed.json";
+fetch(FEED_URL).then(r => {
+  if (!r.ok) throw new Error(FEED_URL + " not found — run feed.py first");
   return r.json();
 }).then(d => {
   DATA = d;
