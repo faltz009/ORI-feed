@@ -1,64 +1,12 @@
 {
- "generated": "2026-07-10T12:24:15Z",
+ "generated": "2026-07-10T12:58:27Z",
  "server": "ORI 1.0 (2025)",
- "window_hours": 24.0,
- "message_count": 132,
+ "server_id": "1344300408893345863",
+ "server_icon": "https://cdn.discordapp.com/icons/1344300408893345863/6736f5a7aaeedb531cf0950ecb31cd52.png?size=128",
+ "window_hours": 24,
+ "message_count": 129,
  "channels_skipped_no_access": 2,
  "messages": [
-  {
-   "user": "O_oNevermore",
-   "message": "",
-   "timestamp": "2026-07-09T12:50:17.518000+00:00",
-   "channel": "✍️eval-log",
-   "thread": null,
-   "reply_to": null,
-   "id": "discord:1524759600900083792",
-   "user_id": "discord:335107602243518466",
-   "url": "https://discord.com/channels/1344300408893345863/1409673828673523762/1524759600900083792",
-   "attachments": [
-    {
-     "name": "image.png",
-     "url": "https://cdn.discordapp.com/attachments/1409673828673523762/1524759600560209951/image.png?ex=6a519349&is=6a5041c9&hm=c56fc4af21538964a4cfafd1dff4b2f98964195350e0e9a439cf65943a288952&",
-     "bytes": 103568
-    }
-   ],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)",
-   "reactions": [
-    {
-     "emoji": "👍",
-     "count": 1
-    }
-   ]
-  },
-  {
-   "user": "Defender",
-   "message": "How's the Zero app thing going? what does it do? 😄",
-   "timestamp": "2026-07-09T12:52:15.253000+00:00",
-   "channel": "✍️walter-log",
-   "thread": null,
-   "reply_to": null,
-   "id": "discord:1524760094716334232",
-   "user_id": "discord:1221182134950301706",
-   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1524760094716334232",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)"
-  },
-  {
-   "user": "Defender",
-   "message": "<@95614482352439296>",
-   "timestamp": "2026-07-09T12:52:19.312000+00:00",
-   "channel": "✍️walter-log",
-   "thread": null,
-   "reply_to": null,
-   "id": "discord:1524760111741014137",
-   "user_id": "discord:1221182134950301706",
-   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1524760111741014137",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)"
-  },
   {
    "user": "Hazor",
    "message": "Waiiit lmao, well I just used it to pull ORI data yesterday",
@@ -1210,7 +1158,8 @@
     {
      "name": "Screenshot_20260709-201716_Chrome.png",
      "url": "https://cdn.discordapp.com/attachments/1524714922666229760/1524841912543219822/Screenshot_20260709-201716_Chrome.png?ex=6a51dff2&is=6a508e72&hm=b4a94fe18398009c1d0ca50016d546957d19952c7272c8743be83a0c8c1da8ec&",
-     "bytes": 95760
+     "bytes": 95760,
+     "file": "feed/media/1524841912543219822-Screenshot_20260709-201716_Chrome.png"
     }
    ],
    "platform": "discord",
@@ -1362,7 +1311,8 @@
     {
      "name": "image0.png",
      "url": "https://cdn.discordapp.com/attachments/1344689281293221950/1524851909909938236/image0.png?ex=6a51e941&is=6a5097c1&hm=7bea7747d320aaaff0e7d124f5d94194521f084b2a6f0b9df1786d75032d98af&",
-     "bytes": 414795
+     "bytes": 414795,
+     "file": "feed/media/1524851909909938236-image0.png"
     }
    ],
    "platform": "discord",
@@ -1470,7 +1420,8 @@
     {
      "name": "image.png",
      "url": "https://cdn.discordapp.com/attachments/1425960592195321907/1524890702037782669/image.png?ex=6a520d62&is=6a50bbe2&hm=475f8d058f9e7bc57fc0cfc7939dba6603d8c641c3531e741aad5daac51694dd&",
-     "bytes": 165755
+     "bytes": 165755,
+     "file": "feed/media/1524890702037782669-image.png"
     }
    ],
    "platform": "discord",
@@ -1544,7 +1495,8 @@
     {
      "name": "image.png",
      "url": "https://cdn.discordapp.com/attachments/1425960592195321907/1524902430679109722/image.png?ex=6a52184e&is=6a50c6ce&hm=9385ef150e764dd2f471c48d390631e4f01562a6f9b4539b94794e4ca67dc1c3&",
-     "bytes": 693499
+     "bytes": 693499,
+     "file": "feed/media/1524902430679109722-image.png"
     }
    ],
    "platform": "discord",

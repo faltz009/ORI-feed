@@ -1,62 +1,20 @@
 {
- "generated": "2026-07-10T12:24:17Z",
- "window_hours": 24.0,
- "message_count": 142,
+ "generated": "2026-07-10T12:58:29Z",
+ "window_hours": 24,
+ "message_count": 147,
+ "servers": [
+  {
+   "name": "ORI 1.0 (2025)",
+   "id": "1344300408893345863",
+   "icon": "https://cdn.discordapp.com/icons/1344300408893345863/6736f5a7aaeedb531cf0950ecb31cd52.png?size=128"
+  },
+  {
+   "name": "ORI 2.0",
+   "id": "1510645022645555321",
+   "icon": "https://cdn.discordapp.com/icons/1510645022645555321/bac36a3abc1500b7283539c57d695a84.png?size=128"
+  }
+ ],
  "messages": [
-  {
-   "user": "O_oNevermore",
-   "message": "",
-   "timestamp": "2026-07-09T12:50:17.518000+00:00",
-   "channel": "✍️eval-log",
-   "thread": null,
-   "reply_to": null,
-   "id": "discord:1524759600900083792",
-   "user_id": "discord:335107602243518466",
-   "url": "https://discord.com/channels/1344300408893345863/1409673828673523762/1524759600900083792",
-   "attachments": [
-    {
-     "name": "image.png",
-     "url": "https://cdn.discordapp.com/attachments/1409673828673523762/1524759600560209951/image.png?ex=6a519349&is=6a5041c9&hm=c56fc4af21538964a4cfafd1dff4b2f98964195350e0e9a439cf65943a288952&",
-     "bytes": 103568
-    }
-   ],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)",
-   "reactions": [
-    {
-     "emoji": "👍",
-     "count": 1
-    }
-   ]
-  },
-  {
-   "user": "Defender",
-   "message": "How's the Zero app thing going? what does it do? 😄",
-   "timestamp": "2026-07-09T12:52:15.253000+00:00",
-   "channel": "✍️walter-log",
-   "thread": null,
-   "reply_to": null,
-   "id": "discord:1524760094716334232",
-   "user_id": "discord:1221182134950301706",
-   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1524760094716334232",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)"
-  },
-  {
-   "user": "Defender",
-   "message": "<@95614482352439296>",
-   "timestamp": "2026-07-09T12:52:19.312000+00:00",
-   "channel": "✍️walter-log",
-   "thread": null,
-   "reply_to": null,
-   "id": "discord:1524760111741014137",
-   "user_id": "discord:1221182134950301706",
-   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1524760111741014137",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)"
-  },
   {
    "user": "Hazor",
    "message": "Waiiit lmao, well I just used it to pull ORI data yesterday",
@@ -1208,7 +1166,8 @@
     {
      "name": "Screenshot_20260709-201716_Chrome.png",
      "url": "https://cdn.discordapp.com/attachments/1524714922666229760/1524841912543219822/Screenshot_20260709-201716_Chrome.png?ex=6a51dff2&is=6a508e72&hm=b4a94fe18398009c1d0ca50016d546957d19952c7272c8743be83a0c8c1da8ec&",
-     "bytes": 95760
+     "bytes": 95760,
+     "file": "feed/media/1524841912543219822-Screenshot_20260709-201716_Chrome.png"
     }
    ],
    "platform": "discord",
@@ -1360,7 +1319,8 @@
     {
      "name": "image0.png",
      "url": "https://cdn.discordapp.com/attachments/1344689281293221950/1524851909909938236/image0.png?ex=6a51e941&is=6a5097c1&hm=7bea7747d320aaaff0e7d124f5d94194521f084b2a6f0b9df1786d75032d98af&",
-     "bytes": 414795
+     "bytes": 414795,
+     "file": "feed/media/1524851909909938236-image0.png"
     }
    ],
    "platform": "discord",
@@ -1468,7 +1428,8 @@
     {
      "name": "image.png",
      "url": "https://cdn.discordapp.com/attachments/1425960592195321907/1524890702037782669/image.png?ex=6a520d62&is=6a50bbe2&hm=475f8d058f9e7bc57fc0cfc7939dba6603d8c641c3531e741aad5daac51694dd&",
-     "bytes": 165755
+     "bytes": 165755,
+     "file": "feed/media/1524890702037782669-image.png"
     }
    ],
    "platform": "discord",
@@ -1542,7 +1503,8 @@
     {
      "name": "image.png",
      "url": "https://cdn.discordapp.com/attachments/1425960592195321907/1524902430679109722/image.png?ex=6a52184e&is=6a50c6ce&hm=9385ef150e764dd2f471c48d390631e4f01562a6f9b4539b94794e4ca67dc1c3&",
-     "bytes": 693499
+     "bytes": 693499,
+     "file": "feed/media/1524902430679109722-image.png"
     }
    ],
    "platform": "discord",
@@ -2053,7 +2015,8 @@
     {
      "name": "image.png",
      "url": "https://cdn.discordapp.com/attachments/1524993483922866226/1525008533068976240/image.png?ex=6a51d25f&is=6a5080df&hm=38341835f467cca6df8fbdb229fda2341b57045a7f271da3f04be99e68095d6f&",
-     "bytes": 126554
+     "bytes": 126554,
+     "file": "feed/media/1525008533068976240-image.png"
     }
    ],
    "platform": "discord",
@@ -2148,6 +2111,125 @@
    "attachments": [],
    "platform": "discord",
    "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Defender",
+   "message": "I'll keep thinking about this because the Elo has always seemed fundamental to me\n\nTwo theologians claim to have the answer, they seem to have conflicting answers. We have one ship to steer. Who do we go with?\n\nI think there's two ways to make that decision\n\n- listen to both and decide (track record doesn't matter, we do our best to understand the situation and both their inputs)\n- defer to established hierarchy (which we're already doing by deferring to _the theologians_ as a category)",
+   "timestamp": "2026-07-10T12:33:07.698000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525117669387403274",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525117669387403274",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Defender",
+   "message": "I think the other fundamental reason is that this is meant to become the standard default social media algorithm",
+   "timestamp": "2026-07-10T12:33:28.606000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525117757081911488",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525117757081911488",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Defender",
+   "message": "- who do you learn from, ups their elo\n- who learns from you, ups your elo",
+   "timestamp": "2026-07-10T12:33:46.049000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525117830243160205",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525117830243160205",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Defender",
+   "message": "what you teach may be completely false trash but if a million people learn from you daily, that gives you elo X\n\nand then if you learn from Tom, now Tom has a very high elo because he's your source.",
+   "timestamp": "2026-07-10T12:35:23.758000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525118240064278678",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525118240064278678",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Defender",
+   "message": "(maybe what I am measuring is degree of influence over minds)",
+   "timestamp": "2026-07-10T12:35:48.131000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525118342292312195",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525118342292312195",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "-------\n\n- If I wake up and see this long message from Defender, but it's noise (U) then his elo ranking should go down (relative to me)\n- but instead of this making someone go down \"globally\", it does down relative to me\n- I want a mechanism where people put information in and it rises like a hot air balloon",
+   "timestamp": "2026-07-10T12:45:13.652000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525120714259169281",
+   "user_id": "discord:228707291317141504",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525120714259169281",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Defender",
+   "message": "This comment on substack, I should be able to click on this guy and be able to see everyone he holds in high regard as sources of good & true information",
+   "timestamp": "2026-07-10T12:51:03.725000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525122182571884656",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525122182571884656",
+   "attachments": [
+    {
+     "name": "image.png",
+     "url": "https://cdn.discordapp.com/attachments/1524429008664657950/1525122182588403762/image.png?ex=6a523c37&is=6a50eab7&hm=53bc818bf4a381e95a53d3ccd99fc3d5003accaad5eb8805d27939a4106e1ec2&",
+     "bytes": 360128,
+     "file": "feed/media/1525122182588403762-image.png"
+    }
+   ],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Defender",
+   "message": "I think making a list of important people you follow and what you trust them on, and maintaining that, is a lot of work. \n\nit can be generated from you just marking things A/B/U",
+   "timestamp": "2026-07-10T12:51:51.926000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525122384741404733",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525122384741404733",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
   }
  ]
 }

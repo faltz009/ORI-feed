@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Zero Feed</title>
+<title>ORI Feed</title>
 <style>
 :root {
   --bg: hsl(210, 25%, 8%);
@@ -20,16 +20,55 @@
 body {
   background: var(--bg); color: var(--fg);
   font: 15px/1.55 -apple-system, "Segoe UI", Roboto, "Open Sans", sans-serif;
-  display: flex; min-height: 100vh;
+  display: flex; flex-direction: column; min-height: 100vh;
 }
 a { color: var(--links); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+#top {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  background: var(--sidebar-bg); border-bottom: 1px solid var(--border);
+  padding: 9px 18px; position: sticky; top: 0; z-index: 6;
+}
+#top .prod { font-size: 15px; font-weight: 600; color: var(--sidebar-fg);
+  letter-spacing: .03em; margin-right: 8px; }
+.schip {
+  display: flex; align-items: center; gap: 7px;
+  background: none; border: 1px solid var(--border); border-radius: 16px;
+  color: var(--sidebar-fg); font: inherit; font-size: 13.5px;
+  padding: 3px 12px 3px 5px; cursor: pointer;
+}
+.schip:hover { border-color: var(--muted); }
+.schip.active { border-color: var(--accent); color: var(--accent); }
+.schip img, .schip .sini { width: 22px; height: 22px; border-radius: 50%; }
+.schip .sini { background: var(--hover); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: var(--accent); }
+
+#layout { display: flex; flex: 1; min-height: 0; }
 #sidebar {
   width: 250px; flex-shrink: 0; background: var(--sidebar-bg);
-  padding: 18px 0; overflow-y: auto; position: sticky; top: 0; height: 100vh;
+  padding: 14px 0; overflow-y: auto; position: sticky; top: 47px;
+  height: calc(100vh - 47px);
 }
-#sidebar h1 { font-size: 17px; color: var(--sidebar-fg); padding: 0 20px 12px; }
+#server-brand { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.ori-badge {
+  position: fixed; bottom: 18px; right: 18px; z-index: 5;
+  background: var(--sidebar-bg); border: 1px solid var(--border);
+  border-radius: 6px; padding: 8px 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.ori-badge-ring { width: 64px; height: 64px; flex-shrink: 0; }
+.ori-badge-label { font-size: 9.5px; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--muted); line-height: 1.4; max-width: 80px; }
+#settings-btn {
+  margin-left: auto;
+  background: none; border: 1px solid var(--border); border-radius: 4px;
+  color: var(--muted); font: inherit; font-size: 12.5px; padding: 4px 14px;
+  cursor: pointer;
+}
+#settings-btn:hover { color: var(--accent); border-color: var(--accent); }
 #sidebar .server { color: var(--muted); font-size: 11px; text-transform: uppercase;
   letter-spacing: .08em; padding: 14px 20px 4px; }
 #sidebar button {
@@ -63,11 +102,41 @@ a:hover { text-decoration: underline; }
 .msg .file { display: inline-block; margin-top: 4px; font-size: 13px; }
 #empty { color: var(--muted); margin-top: 40px; text-align: center; }
 
+#settings {
+  position: fixed; inset: 0; background: rgba(0,0,0,.55);
+  display: flex; align-items: center; justify-content: center; z-index: 10;
+}
+#settings[hidden] { display: none; }
+#settings .card {
+  background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 22px 26px; width: min(430px, 92vw);
+}
+#settings h2 { font-size: 15px; color: var(--accent); margin-bottom: 4px; }
+#settings p { color: var(--muted); font-size: 12.5px; margin-bottom: 14px; }
+#settings label { display: flex; justify-content: space-between; align-items: center;
+  font-size: 14px; margin: 8px 0; }
+#settings select {
+  background: var(--bg); color: var(--fg); border: 1px solid var(--border);
+  border-radius: 4px; font: inherit; padding: 3px 8px;
+}
+#settings pre {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+  padding: 8px 10px; font-size: 12px; color: var(--accent);
+  overflow-x: auto; margin: 12px 0; white-space: pre-wrap; word-break: break-all;
+}
+#settings .row { display: flex; gap: 10px; margin-top: 6px; }
+#settings .btn {
+  flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+  color: var(--fg); font: inherit; font-size: 13px; padding: 7px 0; cursor: pointer;
+}
+#settings .btn:hover { border-color: var(--accent); color: var(--accent); }
+
 @media (max-width: 720px) {
-  body { flex-direction: column; }
+  #layout { flex-direction: column; }
   #sidebar { width: 100%; height: auto; position: static; display: flex;
     flex-wrap: wrap; gap: 2px; padding: 10px; }
-  #sidebar h1, #sidebar .server { width: 100%; padding: 4px 10px; }
+  #sidebar .server { width: 100%; padding: 4px 10px; }
+  .ori-badge { display: none; }
   #sidebar button { width: auto; padding: 4px 10px; border-radius: 12px;
     background: var(--hover); font-size: 13px; }
   #main { padding: 18px 14px 60px; }
@@ -75,25 +144,64 @@ a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-<nav id="sidebar"><h1>Zero Feed</h1></nav>
+<header id="top">
+  <span class="prod">Discord Feed Viewer</span>
+  <div id="server-brand"></div>
+  <button id="settings-btn">&#9881; settings</button>
+</header>
+<div id="layout">
+<nav id="sidebar"></nav>
+<div class="ori-badge">
+  <div class="ori-badge-ring"><canvas id="ori-logo" title="click and hold"></canvas></div>
+  <span class="ori-badge-label">Open Research Institute</span>
+</div>
+<div id="settings" hidden>
+  <div class="card">
+    <h2>&#9881; Puller settings</h2>
+    <p>These knobs configure <b>feed.py</b> (the thing that pulls from Discord —
+       this page only displays its output). Pick values, then either download
+       <b>config.json</b> into the ORI-feed folder or copy the one-line command.</p>
+    <label>Window (how far back)
+      <select id="k-window">
+        <option value="24">24 hours</option><option value="48">48 hours</option>
+        <option value="72">72 hours</option><option value="168">1 week</option>
+        <option value="720">30 days</option>
+      </select></label>
+    <label>Download media locally
+      <select id="k-media"><option value="true">yes</option><option value="false">no</option></select></label>
+    <label>Media size cap
+      <select id="k-cap"><option value="10">10 MB</option><option value="50" selected>50 MB</option>
+        <option value="200">200 MB</option></select></label>
+    <label>Dated daily snapshots (for cron)
+      <select id="k-snap"><option value="false">no</option><option value="true">yes</option></select></label>
+    <pre id="k-cmd"></pre>
+    <div class="row">
+      <button class="btn" id="k-download">download config.json</button>
+      <button class="btn" id="k-close">close</button>
+    </div>
+  </div>
+</div>
 <main id="main">
   <div id="meta">loading…</div>
   <input id="search" type="search" placeholder="filter messages…" hidden>
   <div id="msgs"></div>
   <div id="empty" hidden>no messages match</div>
 </main>
+</div>
 <script>
 "use strict";
 const $ = id => document.getElementById(id);
-let DATA = null, channel = null, query = "";
+let DATA = null, channel = null, query = "", serverFilter = null;
 
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const linkify = s => s.replace(/(https?:\/\/[^\s<]+)/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
 const isImg = n => /\.(png|jpe?g|gif|webp)$/i.test(n || "");
+const isVid = n => /\.(mp4|webm|mov)$/i.test(n || "");
 
 function render() {
   const box = $("msgs");
   let msgs = DATA.messages;
+  if (serverFilter) msgs = msgs.filter(m => m.server === serverFilter);
   if (channel) msgs = msgs.filter(m => m.channel === channel);
   if (query) {
     const q = query.toLowerCase();
@@ -112,9 +220,13 @@ function render() {
       (m.reply_to ? `<span class="badge">&#8617; reply</span>` : "");
     let atts = "";
     for (const a of m.attachments || []) {
-      atts += isImg(a.name)
-        ? `<a href="${esc(a.url||"")}" target="_blank" rel="noopener"><img class="att" src="${esc(a.url||"")}" alt="${esc(a.name||"")}" loading="lazy"></a>`
-        : `<a class="file" href="${esc(a.url||"")}" target="_blank" rel="noopener">&#128206; ${esc(a.name||"file")}</a>`;
+      const src = esc(a.file || a.url || "");
+      if (isImg(a.name))
+        atts += `<a href="${src}" target="_blank" rel="noopener"><img class="att" src="${src}" alt="${esc(a.name||"")}" loading="lazy"></a>`;
+      else if (isVid(a.name))
+        atts += `<video class="att" src="${src}" controls preload="metadata"></video>`;
+      else
+        atts += `<a class="file" href="${src}" target="_blank" rel="noopener">&#128206; ${esc(a.name||"file")}</a>`;
     }
     html += `<div class="msg"><div class="head">` +
       `<a class="user" href="${esc(m.url||"#")}" target="_blank" rel="noopener">${esc(m.user||"?")}</a>` +
@@ -124,22 +236,54 @@ function render() {
   box.innerHTML = html;
 }
 
+function serverBrand() {
+  const box = $("server-brand");
+  let servers = DATA.servers;
+  if (!servers) {                       // older feed.json without server metadata
+    const names = [...new Set(DATA.messages.map(m => m.server || "server"))];
+    servers = names.map(n => ({ name: n, icon: null }));
+  }
+  for (const s of servers) {
+    const chip = document.createElement("button");
+    chip.className = "schip";
+    const icon = s.icon
+      ? `<img src="${esc(s.icon)}" alt="">`
+      : `<span class="sini">${esc((s.name || "?")[0].toUpperCase())}</span>`;
+    chip.innerHTML = `${icon}<span>${esc(s.name || "?")}</span>`;
+    chip.title = "click to filter to this server";
+    chip.onclick = () => {
+      serverFilter = (serverFilter === s.name) ? null : s.name;
+      channel = null;
+      box.querySelectorAll(".schip").forEach(c => c.classList.remove("active"));
+      if (serverFilter) chip.classList.add("active");
+      sidebar(); render();
+    };
+    box.appendChild(chip);
+  }
+}
+
 function sidebar() {
   const nav = $("sidebar");
+  nav.innerHTML = "";
+  const pool = serverFilter
+    ? DATA.messages.filter(m => m.server === serverFilter)
+    : DATA.messages;
   const byServer = {};
-  for (const m of DATA.messages) {
+  for (const m of pool) {
     const s = m.server || "server", c = m.channel || "?";
     (byServer[s] ??= {})[c] = (byServer[s][c] || 0) + 1;
   }
   const all = document.createElement("button");
-  all.innerHTML = `<span>all channels</span><span class="n">${DATA.messages.length}</span>`;
+  all.innerHTML = `<span>all channels</span><span class="n">${pool.length}</span>`;
   all.className = "active";
   all.onclick = () => { channel = null; select(all); };
   nav.appendChild(all);
   for (const [srv, chans] of Object.entries(byServer)) {
-    const h = document.createElement("div");
-    h.className = "server"; h.textContent = srv;
-    nav.appendChild(h);
+    if (!serverFilter) {
+      const h = document.createElement("div");
+      h.className = "server"; h.textContent = srv;
+      nav.appendChild(h);
+    }
     for (const [c, n] of Object.entries(chans).sort((a, b) => b[1] - a[1])) {
       const b = document.createElement("button");
       b.innerHTML = `<span># ${esc(c)}</span><span class="n">${n}</span>`;
@@ -154,6 +298,30 @@ function sidebar() {
   }
 }
 
+// --- puller settings panel ---
+function knobs() {
+  return { window_hours: +$("k-window").value,
+           media: $("k-media").value === "true",
+           media_max_mb: +$("k-cap").value,
+           snapshot: $("k-snap").value === "true" };
+}
+function refreshCmd() {
+  const k = knobs();
+  $("k-cmd").textContent =
+    `WINDOW_HOURS=${k.window_hours} MEDIA=${k.media?1:0} MEDIA_MAX_MB=${k.media_max_mb} ` +
+    `SNAPSHOT=${k.snapshot?1:0} python3 feed.py`;
+}
+$("settings-btn").onclick = () => { $("settings").hidden = false; refreshCmd(); };
+$("k-close").onclick = () => $("settings").hidden = true;
+$("settings").onclick = e => { if (e.target === $("settings")) $("settings").hidden = true; };
+for (const id of ["k-window","k-media","k-cap","k-snap"]) $(id).onchange = refreshCmd;
+$("k-download").onclick = () => {
+  const blob = new Blob([JSON.stringify(knobs(), null, 1)], {type: "application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = "config.json"; a.click();
+  URL.revokeObjectURL(a.href);
+};
+
 fetch("feed/feed.json").then(r => {
   if (!r.ok) throw new Error("feed/feed.json not found — run feed.py first");
   return r.json();
@@ -163,8 +331,17 @@ fetch("feed/feed.json").then(r => {
     `${d.message_count} messages · last ${d.window_hours}h · generated ${d.generated}`;
   $("search").hidden = false;
   $("search").oninput = e => { query = e.target.value; render(); };
-  sidebar(); render();
+  const names = (d.servers || []).map(s => s.name);
+  if (names.length) document.title = names.join(" + ") + " — feed";
+  const fav = (d.servers || []).find(s => s.icon);
+  if (fav) {
+    const l = document.createElement("link");
+    l.rel = "icon"; l.href = fav.icon;
+    document.head.appendChild(l);
+  }
+  serverBrand(); sidebar(); render();
 }).catch(e => { $("meta").textContent = e.message; });
 </script>
+<script src="logo.js"></script>
 </body>
 </html>
