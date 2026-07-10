@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zero Feed</title>
+<style>
+:root {
+  --bg: hsl(210, 25%, 8%);
+  --fg: #c5c5c5;
+  --sidebar-bg: #14191f;
+  --sidebar-fg: #c8c9db;
+  --muted: #5c6773;
+  --accent: #ffb454;
+  --links: #0096cf;
+  --hover: #191f26;
+  --border: #2d334f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 15px/1.55 -apple-system, "Segoe UI", Roboto, "Open Sans", sans-serif;
+  display: flex; min-height: 100vh;
+}
+a { color: var(--links); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+#sidebar {
+  width: 250px; flex-shrink: 0; background: var(--sidebar-bg);
+  padding: 18px 0; overflow-y: auto; position: sticky; top: 0; height: 100vh;
+}
+#sidebar h1 { font-size: 17px; color: var(--sidebar-fg); padding: 0 20px 12px; }
+#sidebar .server { color: var(--muted); font-size: 11px; text-transform: uppercase;
+  letter-spacing: .08em; padding: 14px 20px 4px; }
+#sidebar button {
+  display: flex; justify-content: space-between; width: 100%;
+  background: none; border: none; color: var(--sidebar-fg);
+  font: inherit; font-size: 14px; padding: 4px 20px; cursor: pointer; text-align: left;
+}
+#sidebar button:hover { background: var(--hover); }
+#sidebar button.active { color: var(--accent); }
+#sidebar button .n { color: var(--muted); font-size: 12px; }
+
+#main { flex: 1; min-width: 0; padding: 28px 40px 80px; max-width: 860px; }
+#meta { color: var(--muted); font-size: 13px; margin-bottom: 18px; }
+#search {
+  width: 100%; background: var(--sidebar-bg); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--fg); font: inherit; padding: 7px 12px; margin-bottom: 22px;
+}
+#search:focus { outline: none; border-color: var(--accent); }
+
+.day { color: var(--accent); font-size: 12px; letter-spacing: .06em;
+  border-bottom: 1px solid var(--border); padding-bottom: 4px; margin: 26px 0 10px; }
+.msg { padding: 7px 10px; border-radius: 4px; }
+.msg:hover { background: var(--hover); }
+.msg .head { font-size: 13px; }
+.msg .user { font-weight: 600; color: var(--accent); }
+.msg .time { color: var(--muted); margin-left: 8px; }
+.msg .badge { color: var(--muted); margin-left: 8px; font-size: 12px; }
+.msg .body { white-space: pre-wrap; word-wrap: break-word; margin-top: 2px; }
+.msg img.att { max-width: 380px; max-height: 300px; border-radius: 4px;
+  display: block; margin-top: 6px; }
+.msg .file { display: inline-block; margin-top: 4px; font-size: 13px; }
+#empty { color: var(--muted); margin-top: 40px; text-align: center; }
+
+@media (max-width: 720px) {
+  body { flex-direction: column; }
+  #sidebar { width: 100%; height: auto; position: static; display: flex;
+    flex-wrap: wrap; gap: 2px; padding: 10px; }
+  #sidebar h1, #sidebar .server { width: 100%; padding: 4px 10px; }
+  #sidebar button { width: auto; padding: 4px 10px; border-radius: 12px;
+    background: var(--hover); font-size: 13px; }
+  #main { padding: 18px 14px 60px; }
+}
+</style>
+</head>
+<body>
+<nav id="sidebar"><h1>Zero Feed</h1></nav>
+<main id="main">
+  <div id="meta">loading…</div>
+  <input id="search" type="search" placeholder="filter messages…" hidden>
+  <div id="msgs"></div>
+  <div id="empty" hidden>no messages match</div>
+</main>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+let DATA = null, channel = null, query = "";
+
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const linkify = s => s.replace(/(https?:\/\/[^\s<]+)/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+const isImg = n => /\.(png|jpe?g|gif|webp)$/i.test(n || "");
+
+function render() {
+  const box = $("msgs");
+  let msgs = DATA.messages;
+  if (channel) msgs = msgs.filter(m => m.channel === channel);
+  if (query) {
+    const q = query.toLowerCase();
+    msgs = msgs.filter(m => (m.message||"").toLowerCase().includes(q)
+                         || (m.user||"").toLowerCase().includes(q));
+  }
+  $("empty").hidden = msgs.length > 0;
+  let html = "", day = "";
+  for (const m of msgs) {
+    const d = (m.timestamp || "").slice(0, 10);
+    if (d !== day) { day = d; html += `<div class="day">${d}</div>`; }
+    const t = (m.timestamp || "").slice(11, 16);
+    const badges =
+      (channel ? "" : `<span class="badge">#${esc(m.channel || "?")}</span>`) +
+      (m.thread ? `<span class="badge">&#8627; ${esc(m.thread)}</span>` : "") +
+      (m.reply_to ? `<span class="badge">&#8617; reply</span>` : "");
+    let atts = "";
+    for (const a of m.attachments || []) {
+      atts += isImg(a.name)
+        ? `<a href="${esc(a.url||"")}" target="_blank" rel="noopener"><img class="att" src="${esc(a.url||"")}" alt="${esc(a.name||"")}" loading="lazy"></a>`
+        : `<a class="file" href="${esc(a.url||"")}" target="_blank" rel="noopener">&#128206; ${esc(a.name||"file")}</a>`;
+    }
+    html += `<div class="msg"><div class="head">` +
+      `<a class="user" href="${esc(m.url||"#")}" target="_blank" rel="noopener">${esc(m.user||"?")}</a>` +
+      `<span class="time" title="${esc(m.timestamp||"")}">${t}</span>${badges}</div>` +
+      (m.message ? `<div class="body">${linkify(esc(m.message))}</div>` : "") + atts + `</div>`;
+  }
+  box.innerHTML = html;
+}
+
+function sidebar() {
+  const nav = $("sidebar");
+  const byServer = {};
+  for (const m of DATA.messages) {
+    const s = m.server || "server", c = m.channel || "?";
+    (byServer[s] ??= {})[c] = (byServer[s][c] || 0) + 1;
+  }
+  const all = document.createElement("button");
+  all.innerHTML = `<span>all channels</span><span class="n">${DATA.messages.length}</span>`;
+  all.className = "active";
+  all.onclick = () => { channel = null; select(all); };
+  nav.appendChild(all);
+  for (const [srv, chans] of Object.entries(byServer)) {
+    const h = document.createElement("div");
+    h.className = "server"; h.textContent = srv;
+    nav.appendChild(h);
+    for (const [c, n] of Object.entries(chans).sort((a, b) => b[1] - a[1])) {
+      const b = document.createElement("button");
+      b.innerHTML = `<span># ${esc(c)}</span><span class="n">${n}</span>`;
+      b.onclick = () => { channel = c; select(b); };
+      nav.appendChild(b);
+    }
+  }
+  function select(btn) {
+    nav.querySelectorAll("button").forEach(x => x.classList.remove("active"));
+    btn.classList.add("active");
+    render();
+  }
+}
+
+fetch("feed/feed.json").then(r => {
+  if (!r.ok) throw new Error("feed/feed.json not found — run feed.py first");
+  return r.json();
+}).then(d => {
+  DATA = d;
+  $("meta").textContent =
+    `${d.message_count} messages · last ${d.window_hours}h · generated ${d.generated}`;
+  $("search").hidden = false;
+  $("search").oninput = e => { query = e.target.value; render(); };
+  sidebar(); render();
+}).catch(e => { $("meta").textContent = e.message; });
+</script>
+</body>
+</html>

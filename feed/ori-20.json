@@ -1,0 +1,162 @@
+{
+ "generated": "2026-07-10T12:24:17Z",
+ "server": "ORI 2.0",
+ "window_hours": 24.0,
+ "message_count": 10,
+ "channels_skipped_no_access": 0,
+ "messages": [
+  {
+   "user": "Omar Shehata",
+   "message": "Testing slowmode, hello! this is my daily message",
+   "timestamp": "2026-07-10T04:27:17.828000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1524995405971198056",
+   "user_id": "discord:228707291317141504",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1524995405971198056",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Defender",
+   "message": "",
+   "timestamp": "2026-07-10T04:27:39.465000+00:00",
+   "channel": "bottom-floor",
+   "thread": "Thread test",
+   "reply_to": "discord:1524995405971198056",
+   "id": "discord:1524995496723218502",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524995405971198056/1524995496723218502",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0",
+   "type": 21
+  },
+  {
+   "user": "Defender",
+   "message": "test",
+   "timestamp": "2026-07-10T04:27:40.023000+00:00",
+   "channel": "bottom-floor",
+   "thread": "Thread test",
+   "reply_to": null,
+   "id": "discord:1524995499063509043",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524995405971198056/1524995499063509043",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "test!",
+   "timestamp": "2026-07-10T04:27:44.967000+00:00",
+   "channel": "bottom-floor",
+   "thread": "Thread test",
+   "reply_to": null,
+   "id": "discord:1524995519800283237",
+   "user_id": "discord:228707291317141504",
+   "url": "https://discord.com/channels/1510645022645555321/1524995405971198056/1524995519800283237",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Defender",
+   "message": "hello!",
+   "timestamp": "2026-07-10T04:27:49.914000+00:00",
+   "channel": "bottom-floor",
+   "thread": "Thread test",
+   "reply_to": null,
+   "id": "discord:1524995540549500980",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524995405971198056/1524995540549500980",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Defender",
+   "message": "test 12 3",
+   "timestamp": "2026-07-10T04:27:58.792000+00:00",
+   "channel": "bottom-floor",
+   "thread": "Thread test",
+   "reply_to": null,
+   "id": "discord:1524995577786400892",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524995405971198056/1524995577786400892",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Defender",
+   "message": "I did find the \"Milady Village\" discord!",
+   "timestamp": "2026-07-10T05:19:27.546000+00:00",
+   "channel": "milady",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525008532959658075",
+   "user_id": "discord:1221182134950301706",
+   "url": "https://discord.com/channels/1510645022645555321/1524993483922866226/1525008532959658075",
+   "attachments": [
+    {
+     "name": "image.png",
+     "url": "https://cdn.discordapp.com/attachments/1524993483922866226/1525008533068976240/image.png?ex=6a51d25f&is=6a5080df&hm=38341835f467cca6df8fbdb229fda2341b57045a7f271da3f04be99e68095d6f&",
+     "bytes": 126554
+    }
+   ],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Tim",
+   "message": "Despite there being some sense in which knowledge can be ranked, no super granular and distilled knowledge ranking has really stood the test of time; and \"lower knowledge\" cannot really be purely \"upgraded\" to \"higher knowledge\", like how the existence of university does not abolish kindergarten. Theology being queen of the sciences is an old idea, and generally Christians would say the Trinity is more important than an exact ordering of angels, but at some point some arithmetic probably helps more for navigating creation (though not spirituality) than even fairly foundational theology.",
+   "timestamp": "2026-07-10T07:05:38.214000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": "discord:1524494112491831487",
+   "id": "discord:1525035253478195310",
+   "user_id": "discord:177129656611373056",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525035253478195310",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Tim",
+   "message": "Looking at Elo systems might illustrate what I mean. It is clear that there are better or worse players given the fact that different people experience different outcomes in the game, and certain game concepts like tempo and positional advantage are foundational to most understanding resulting in the best outcomes; but it is not that clear that we could easily do something like a stratified Elo where we target single chess skills, at least not without them just becoming false metrics when taken too seriously.",
+   "timestamp": "2026-07-10T07:32:07.608000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525041919879680051",
+   "user_id": "discord:177129656611373056",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525041919879680051",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Tim",
+   "message": "Tactics puzzles are  a concrete example, where being able to solve very difficult puzzles (themselves ranked by Elo) is worth *something*, but some players are just way better or worse at tactics than their Elo suggests.",
+   "timestamp": "2026-07-10T07:35:01.838000+00:00",
+   "channel": "bottom-floor",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1525042650653130862",
+   "user_id": "discord:177129656611373056",
+   "url": "https://discord.com/channels/1510645022645555321/1524429008664657950/1525042650653130862",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0",
+   "reactions": [
+    {
+     "emoji": "🤔",
+     "count": 1
+    }
+   ]
+  }
+ ]
+}
