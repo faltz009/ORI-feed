@@ -4,6 +4,11 @@ Get a feel for any Discord server. Add a bot, run one script, and you get the
 last 24 hours (or week, or month) of the community as **one flat JSON** anyone
 can analyze — plus a simple local page to read it, media included.
 
+> **Work in progress:** `report.py` / `report.html` (the Community Report —
+> lexicon, patient zero, heartbeat…) are experimental. See
+> [WIP-NOTES.md](WIP-NOTES.md) for state and open threads. The feed puller and
+> viewer below are the stable part.
+
 Built for the [Open Research Institute](https://openresearchinstitute.org);
 works on any server.
 
