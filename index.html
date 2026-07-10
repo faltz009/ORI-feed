@@ -62,8 +62,14 @@ a:hover { text-decoration: underline; }
 .ori-badge-ring { width: 64px; height: 64px; flex-shrink: 0; }
 .ori-badge-label { font-size: 9.5px; letter-spacing: .09em; text-transform: uppercase;
   color: var(--muted); line-height: 1.4; max-width: 80px; }
-#settings-btn {
+#src-link {
   margin-left: auto;
+  border: 1px solid var(--border); border-radius: 4px;
+  color: var(--muted); font-size: 12.5px; padding: 4px 14px;
+}
+#src-link:hover { color: var(--accent); border-color: var(--accent);
+  text-decoration: none; }
+#settings-btn {
   background: none; border: 1px solid var(--border); border-radius: 4px;
   color: var(--muted); font: inherit; font-size: 12.5px; padding: 4px 14px;
   cursor: pointer;
@@ -147,6 +153,8 @@ a:hover { text-decoration: underline; }
 <header id="top">
   <span class="prod">Discord Feed Viewer</span>
   <div id="server-brand"></div>
+  <a id="src-link" href="https://github.com/faltz009/ORI-feed"
+     target="_blank" rel="noopener">source &amp; setup — get this for your server</a>
   <button id="settings-btn">&#9881; settings</button>
 </header>
 <div id="layout">
