@@ -7,10 +7,9 @@ as a property on each item. Channels the bot cannot read are skipped: the bot's
 role IS the consent boundary.
 
 Output:
-  feed/feed.json              all servers combined, sorted by timestamp
-  feed/<server-slug>.json     one file per server
+  feed/feed.json              all servers, one flat list, sorted by timestamp
   feed/media/                 downloaded attachments (MEDIA=1, default)
-  feed/daily/YYYY-MM-DD.json  timestamped snapshot of the combined feed (SNAPSHOT=1)
+  feed/daily/YYYY-MM-DD.json  timestamped snapshot of the feed (SNAPSHOT=1)
 
 Knobs (environment variables):
   WINDOW_HOURS   how far back to pull (default 24; e.g. 168 = one week)
@@ -199,7 +198,7 @@ def main():
         sys.exit(f"cannot list guilds: HTTP {err}")
 
     os.makedirs(OUT, exist_ok=True)
-    everything, per_server, server_meta = [], [], []
+    everything, server_meta, skipped_total = [], [], 0
     for g in guilds:
         gid, gname = g["id"], g["name"]
         icon = (f"https://cdn.discordapp.com/icons/{gid}/{g['icon']}.png?size=128"
@@ -227,27 +226,17 @@ def main():
                 continue
             records += [normalize(m, gid, gname, ch_name, th_name) for m in msgs]
 
-        records.sort(key=lambda r: r["timestamp"] or "")
-        doc = {"generated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-               "server": gname, "server_id": gid,
-               "server_icon": icon, "window_hours": WINDOW_HOURS,
-               "message_count": len(records),
-               "channels_skipped_no_access": skipped,
-               "messages": records}
-        per_server.append((slug(gname), gname, skipped, doc))
+        print(f"[{gname}] {len(records)} messages, {skipped} private channels skipped")
+        skipped_total += skipped
         everything += records
 
     if MEDIA:
         download_media(everything)
 
-    for sname, gname, skipped, doc in per_server:
-        path = os.path.join(OUT, sname + ".json")
-        json.dump(doc, open(path, "w"), ensure_ascii=False, indent=1)
-        print(f"[{gname}] {doc['message_count']} messages, {skipped} private channels skipped -> {path}")
-
     everything.sort(key=lambda r: r["timestamp"] or "")
     combined = {"generated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                 "window_hours": WINDOW_HOURS, "message_count": len(everything),
+                "channels_skipped_no_access": skipped_total,
                 "servers": server_meta,
                 "messages": everything}
     json.dump(combined, open(os.path.join(OUT, "feed.json"), "w"),
