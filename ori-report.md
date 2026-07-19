@@ -32,8 +32,8 @@ flowchart LR
 `feed.py` automatically enumerates every server the bot belongs to. It does
 not need a second collector or a per-server report mode. `build.py` groups the
 canonical history by `server_id` and runs the same reducer for every group.
-`config.json`'s `guild_id` determines which server is listed first; it does not
-change the analysis or filename contract.
+`ORI-report/config.json`'s `guild_id` determines which server is listed first;
+it does not change the analysis or filename contract.
 
 Every server report is named `weather-<server-id>.json` and is indexed by
 `ORI-report/data/servers.json`. The browser has no alternate single-report
@@ -88,17 +88,19 @@ normalized Discord message. `corpus.py` partitions by UTC month and replaces a
 record with the same platform-prefixed message ID, so repeated pulls can update
 reactions or attachments without duplicating the message.
 
-The canonical record includes message text and identity. Recognizable API
-credentials are replaced with `[credential redacted]` at collection time,
-before either the rolling feed or canonical history is written. Other message
-text remains literal.
+The canonical record includes message text and identity. At collection time,
+Discord user-mention IDs are joined with the display names included in the
+same API message, so the stored feed reads `@Name` as Discord does. Recognizable
+API credentials are then replaced with `[credential redacted]` before either
+the rolling feed or canonical history is written. Other message text remains
+literal.
 
 | Field | Meaning |
 |---|---|
 | `id` | Platform-prefixed message ID and deduplication key |
 | `server_id`, `channel_id`, `thread_id`, `user_id` | Stable origin identities |
 | `server`, `channel`, `thread`, `user` | Human-readable origin and author |
-| `message` | Raw observed message text |
+| `message` | Observed message text with user mentions resolved and credentials redacted |
 | `timestamp` | Original timestamp |
 | `reply_to`, `url` | Provenance and relationship |
 | `attachments`, `reactions` | Attachment metadata and reaction totals |
@@ -304,7 +306,8 @@ and documented as a lexicon lens, not presented as a complete alternate report.
 | `ORI-report/build.py` | Groups canonical history by server, reduces all servers, validates, and writes the report index. |
 | `ORI-report/weather.py` | Tokenization, lexicon, phrases, topics, movement, circles, people, sources, symbols, and activity. |
 | `ORI-report/config.json` | Inspectable analysis thresholds and first-server preference. |
-| `ORI-report/index.html` | Shared visual shell and report-to-feed navigation. |
+| `ORI-report/index.html` | Page skeleton, theme bootstrap, and report-to-feed navigation. |
+| `ORI-report/report.css` | All report styling: themes, the chapter deck, and the responsive passes. |
 | `ORI-report/report.js` | Multi-server report loader and slideshow controller. |
 | `ORI-report/memetic-weather.js` | 3D semantic graph and particle-cloud renderer. |
 | `ORI-report/topic-timeline.js` | Interactive normalized topic timeline. |
@@ -321,6 +324,7 @@ Run before publishing:
 ```bash
 python3 -m unittest discover -s tests -v
 python3 -m unittest discover -s ORI-report/tests -v
+node --check logo.js
 node --check ORI-report/report.js
 node --check ORI-report/memetic-weather.js
 node --check ORI-report/topic-timeline.js

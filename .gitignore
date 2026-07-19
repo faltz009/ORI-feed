@@ -2,3 +2,9 @@ token.txt
 feed.log
 __pycache__/
 ORI-report-*.png
+# Deployment-local artifacts: the collector's setup wizard writes the root
+# config.json, and SNAPSHOT=1 runs write dated feed copies. Neither belongs
+# in the shared repository. (ORI-report/config.json is tracked on purpose —
+# it is the report's analysis configuration, not a deployment preference.)
+/config.json
+feed/daily/

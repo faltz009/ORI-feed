@@ -147,6 +147,9 @@ Three equivalent ways — pick whichever you like:
 Environment variables (`WINDOW_HOURS`, `MEDIA`, `MEDIA_MAX_MB`, `SNAPSHOT`)
 override `config.json` for one-off runs.
 
+Like `token.txt`, the root `config.json` and any `feed/daily/` snapshots are
+deployment-local preferences: both are git-ignored and never pushed.
+
 ## Keeping it updated automatically (optional)
 
 **On your own machine** — add one cron line (`crontab -e`), e.g. daily at 07:00
