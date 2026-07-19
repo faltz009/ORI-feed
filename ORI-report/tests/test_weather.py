@@ -48,7 +48,6 @@ class WeatherTests(unittest.TestCase):
                 content=content,
                 timestamp=f"2026-07-{index + 1:02d}T00:00:00+00:00",
                 channel="general",
-                thread=None,
                 speaker=speaker,
                 reactions=[],
                 attachments=[],
@@ -97,7 +96,6 @@ class WeatherTests(unittest.TestCase):
             reference,
             server={"id": "guild", "name": "Test"},
             coverage={"member_count": 2},
-            member_alias_tokens={"egregore"},
         )
         serialized_features = json.dumps({
             "lexicon": report["lexicon"],
@@ -121,7 +119,6 @@ class WeatherTests(unittest.TestCase):
                 content=content,
                 timestamp=f"2026-07-{index + 1:02d}T00:00:00+00:00",
                 channel="general",
-                thread=None,
                 speaker=speaker,
                 reactions=[],
                 attachments=[],
@@ -153,7 +150,6 @@ class WeatherTests(unittest.TestCase):
             reference,
             server={"id": "guild", "name": "Test"},
             coverage={"member_count": 2},
-            member_alias_tokens=set(),
         )
         self.assertTrue(report["topics"])
         self.assertTrue(all(topic["units"] for topic in report["topics"]))
@@ -198,7 +194,6 @@ class WeatherTests(unittest.TestCase):
                 content="september event planning",
                 timestamp=f"2026-07-{index + 1:02d}T00:00:00+00:00",
                 channel="general",
-                thread=None,
                 speaker=speaker,
                 reactions=[],
                 attachments=[],
@@ -222,7 +217,6 @@ class WeatherTests(unittest.TestCase):
                 content=content,
                 timestamp=f"2026-07-{index + 1:02d}T00:00:00+00:00",
                 channel="general",
-                thread=None,
                 speaker=speaker,
                 reactions=[],
                 attachments=[],
@@ -236,7 +230,6 @@ class WeatherTests(unittest.TestCase):
             reference,
             server={"id": "guild", "name": "Test"},
             coverage={},
-            member_alias_tokens=set(),
         )
         units = [
             unit
@@ -257,7 +250,6 @@ class WeatherTests(unittest.TestCase):
                 content=content,
                 timestamp=f"2026-07-{index + 1:02d}T00:00:00+00:00",
                 channel="general",
-                thread=None,
                 speaker=speaker,
                 reactions=[],
                 attachments=[],
@@ -272,7 +264,6 @@ class WeatherTests(unittest.TestCase):
             reference,
             server={"id": "guild", "name": "Test"},
             coverage={},
-            member_alias_tokens=set(),
         )
         units = {
             unit["term"]: unit
@@ -297,7 +288,6 @@ class WeatherTests(unittest.TestCase):
                 content="long time september event",
                 timestamp=f"2026-07-{index + 1:02d}T00:00:00+00:00",
                 channel="general",
-                thread=None,
                 speaker=speaker,
                 reactions=[],
                 attachments=[],
@@ -330,7 +320,6 @@ class WeatherTests(unittest.TestCase):
                 content="merely the accumulated genetic trait selection",
                 timestamp=f"2026-07-{index + 1:02d}T00:00:00+00:00",
                 channel="general",
-                thread=None,
                 speaker=speaker,
                 reactions=[],
                 attachments=[],
@@ -355,7 +344,6 @@ class WeatherTests(unittest.TestCase):
                     content=f"community discussion knowledge{phrase}",
                     timestamp=when.isoformat(),
                     channel="general",
-                    thread=None,
                     speaker=speaker,
                     reactions=[],
                     attachments=[],
@@ -380,7 +368,6 @@ class WeatherTests(unittest.TestCase):
             reference,
             server={"id": "guild", "name": "Test"},
             coverage={},
-            member_alias_tokens=set(),
         )
         self.assertEqual({row["name"] for row in report["people"]}, {"Alice", "Bob"})
         validate_output(report)

@@ -72,23 +72,24 @@ def validate_output(report: dict) -> None:
     visit(report)
 
 
-def current_feed_metadata(server_id: str | None) -> tuple[dict, dict]:
-    """Read current collection coverage without treating the feed as history."""
-    if not FEED_PATH.exists():
-        return {}, {}
-    payload = json.loads(FEED_PATH.read_text(encoding="utf-8"))
+def current_feed_metadata(feed: dict, server_id: str | None) -> tuple[dict, dict]:
+    """Extract one server's collection coverage from the parsed rolling feed.
+
+    ``feed`` is feed.json parsed once by main(); it contributes icons and
+    coverage metadata only. Canonical history remains the message source.
+    """
     bare_id = (server_id or "").removeprefix("discord:")
     server = next(
         (
             item
-            for item in payload.get("servers", [])
+            for item in feed.get("servers", [])
             if str(item.get("id") or "") == bare_id
         ),
         {},
     )
     return server, {
-        "collector_generated": payload.get("generated"),
-        "channels_skipped_no_access": payload.get("channels_skipped_no_access"),
+        "collector_generated": feed.get("generated"),
+        "channels_skipped_no_access": feed.get("channels_skipped_no_access"),
         "member_count": server.get("member_count"),
         **(server.get("coverage") or {}),
     }
@@ -101,6 +102,7 @@ def build_server_report(
     days: int,
     history: Path,
     reference: "ReferenceData",
+    feed: dict,
 ) -> dict:
     """Reduce one server's canonical records into its report aggregate."""
     eligible = []
@@ -128,7 +130,6 @@ def build_server_report(
             content=record.get("message") or "",
             timestamp=record.get("timestamp"),
             channel=record.get("channel") or "?",
-            thread=record.get("thread"),
             speaker=record.get("user_id") or f"display:{record.get('user') or '?'}",
             display_name=record.get("user") or "?",
             reactions=record.get("reactions") or [],
@@ -136,7 +137,7 @@ def build_server_report(
             current=observed_at >= current_start,
         )
 
-    feed_server, collector_coverage = current_feed_metadata(server_id)
+    feed_server, collector_coverage = current_feed_metadata(feed, server_id)
     aliases.update(feed_server.get("member_aliases") or [])
     latest_record = eligible[-1][1]
     server = {
@@ -161,6 +162,7 @@ def build_server_report(
     # Phrase discovery needs the complete first reduction. Replay only the
     # current window once the qualified bigram inventory is known so compound
     # occurrences replace—not duplicate—their component word observations.
+    # Alias tokens are set once here, before any pass that filters on them.
     analyzer.member_alias_tokens = aliases
     analyzer.begin_semantic_pass(analyzer.phrase_rows(2, reference))
     for observed_at, record in eligible:
@@ -173,12 +175,7 @@ def build_server_report(
             speaker=record.get("user_id") or f"display:{record.get('user') or '?'}",
         )
 
-    report = analyzer.finalize(
-        reference,
-        server=server,
-        coverage=coverage,
-        member_alias_tokens=aliases,
-    )
+    report = analyzer.finalize(reference, server=server, coverage=coverage)
     validate_output(report)
     return report
 
@@ -216,6 +213,9 @@ def main() -> None:
             f"canonical history not found at {history}; run ../feed.py first"
         )
     reference = ReferenceData.load(REFERENCE_DIR)
+    # feed.json contributes only collection metadata (icons, coverage); parse
+    # it once here rather than once per server.
+    feed = json.loads(FEED_PATH.read_text(encoding="utf-8")) if FEED_PATH.exists() else {}
     # One report per server in the canonical corpus. config.guild_id chooses
     # which server appears first; it does not select a different code path or
     # output contract.
@@ -243,7 +243,7 @@ def main() -> None:
     built = []
     for server_id in order:
         report = build_server_report(
-            server_id, by_server[server_id], config, args.days, history, reference
+            server_id, by_server[server_id], config, args.days, history, reference, feed
         )
         bare_id = server_id.split(":", 1)[-1]
         path = OUTPUT_DIR / f"weather-{bare_id}.json"

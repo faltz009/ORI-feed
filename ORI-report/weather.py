@@ -125,10 +125,6 @@ def token_stream(text: str) -> tuple[list[str], set[int]]:
     return tokens, boundaries
 
 
-def tokens_of(text: str) -> list[str]:
-    return token_stream(text)[0]
-
-
 def candidate_ngram_spans(
     tokens: list[str],
     size: int,
@@ -152,12 +148,6 @@ def candidate_ngram_spans(
         if any(word in PLATFORM_WORDS for word in part):
             continue
         yield index, " ".join(part)
-
-
-def candidate_ngrams(tokens: list[str], size: int):
-    """Yield phrase strings when callers do not need token positions."""
-    for _index, phrase in candidate_ngram_spans(tokens, size):
-        yield phrase
 
 
 def emoji_characters(text: str):
@@ -242,6 +232,9 @@ class WeatherAnalyzer:
     def __init__(self, days: int, config: dict):
         self.window_days = days
         self.config = config
+        # reportable_word() runs once per token in several passes; resolve the
+        # configured blacklist to a set here instead of on every call.
+        self.excluded_words = frozenset(config.get("exclude_words") or [])
 
         # Long-history counters. Movement is a 13-week window compared with
         # the preceding 13 weeks, so it cannot be derived from the weather
@@ -337,7 +330,6 @@ class WeatherAnalyzer:
         content: str,
         timestamp: str | None,
         channel: str,
-        thread: str | None,
         speaker: str,
         reactions: list[dict],
         attachments: list[dict],
@@ -362,13 +354,16 @@ class WeatherAnalyzer:
             self.history_word_speakers[word].add(speaker)
             self.history_word_weekly[word][week] += 1
             self.history_word_first.setdefault(word, observed_at)
-        history_phrases = {2: [], 3: []}
-        history_phrase_spans = {2: [], 3: []}
+        # Token positions matter only to the later semantic pass; here the
+        # validated phrase surfaces themselves are the whole observation.
+        history_phrases = {
+            size: [
+                phrase
+                for _index, phrase in candidate_ngram_spans(tokens, size, phrase_boundaries)
+            ]
+            for size in (2, 3)
+        }
         for size in (2, 3):
-            history_phrase_spans[size] = list(
-                candidate_ngram_spans(tokens, size, phrase_boundaries)
-            )
-            history_phrases[size] = [phrase for _index, phrase in history_phrase_spans[size]]
             for phrase in history_phrases[size]:
                 self.history_phrases[size][phrase] += 1
                 self.history_phrase_speakers[size][phrase].add(speaker)
@@ -531,7 +526,7 @@ class WeatherAnalyzer:
             and word not in STOPWORDS
             and word not in PLATFORM_WORDS
             and word not in self.member_alias_tokens
-            and word not in set(self.config.get("exclude_words", []))
+            and word not in self.excluded_words
             and "'" not in word
             and not word.startswith("http")
         )
@@ -1592,9 +1587,12 @@ class WeatherAnalyzer:
         *,
         server: dict,
         coverage: dict,
-        member_alias_tokens: set[str],
     ) -> dict:
-        self.member_alias_tokens = member_alias_tokens
+        """Reduce every counter into the durable report aggregate.
+
+        ``member_alias_tokens`` is analyzer state, set once before the
+        semantic pass — the same exclusion list serves both passes.
+        """
         days = self.day_axis()
         lexicon = self.lexicon(reference)
         bigrams = self.phrase_rows(2, reference)
