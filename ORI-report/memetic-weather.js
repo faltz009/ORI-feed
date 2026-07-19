@@ -41,7 +41,11 @@
       this.nodeById = new Map();
       this.particles = [];
       this.hovered = null;
-      this.playing = true;
+      // Reduced-motion users get a still, fully readable graph: no autoplay,
+      // no ambient orbit, no particle flow. Dragging, scrubbing, and the play
+      // button stay available — those are explicitly requested motion.
+      this.reducedMotion = global.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      this.playing = !this.reducedMotion;
       this.visible = true;
       this.time = 0;
       this.lastFrame = performance.now();
@@ -64,7 +68,19 @@
       this.bindInteraction();
       this.resizeObserver = new ResizeObserver(() => this.resize());
       this.resizeObserver.observe(canvas.parentElement);
-      requestAnimationFrame(timestamp => this.frame(timestamp));
+      this.frameHandle = null;
+      this.scheduleFrame();
+    }
+
+    // Every animation frame is requested through this single owner, so at
+    // most one callback can ever be pending. Without it, hiding and quickly
+    // re-showing the chapter could start a second, parallel frame loop.
+    scheduleFrame() {
+      if (this.frameHandle !== null) return;
+      this.frameHandle = requestAnimationFrame(timestamp => {
+        this.frameHandle = null;
+        this.frame(timestamp);
+      });
     }
 
     resize() {
@@ -729,8 +745,15 @@
     }
 
     setVisible(visible) {
+      if (this.visible === visible) return;
       this.visible = visible;
-      if (visible) this.lastFrame = performance.now();
+      // The loop parks itself while the chapter is hidden, so becoming
+      // visible must restart it. Resetting the clock keeps the first delta
+      // from spanning the entire hidden period.
+      if (visible) {
+        this.lastFrame = performance.now();
+        this.scheduleFrame();
+      }
     }
 
     destroy() {
@@ -738,16 +761,16 @@
       // observers instead of animating a detached canvas forever.
       this.destroyed = true;
       this.resizeObserver.disconnect();
+      if (this.frameHandle !== null) cancelAnimationFrame(this.frameHandle);
+      this.frameHandle = null;
     }
 
     frame(timestamp) {
-      if (this.destroyed) return;
+      // Park while hidden instead of scheduling empty callbacks;
+      // setVisible(true) restarts the loop.
+      if (this.destroyed || !this.visible) return;
       const delta = clamp((timestamp - this.lastFrame) / 1000, 0.001, 0.05);
       this.lastFrame = timestamp;
-      if (!this.visible) {
-        requestAnimationFrame(next => this.frame(next));
-        return;
-      }
       if (this.playing && this.days.length > 1) {
         this.time += delta / 1.35;
         if (this.time >= this.days.length - 1) {
@@ -755,15 +778,17 @@
           this.playing = false;
         }
       }
-      if (!this.dragging && !this.hovered) this.camera.yaw += delta * 0.032;
+      if (!this.dragging && !this.hovered && !this.reducedMotion) {
+        this.camera.yaw += delta * 0.032;
+      }
       this.updateState(delta);
       this.simulate(delta);
-      this.updateParticles(delta);
+      if (!this.reducedMotion) this.updateParticles(delta);
       this.draw();
       this.findHovered();
       this.updateReadout();
       this.updateControls();
-      requestAnimationFrame(next => this.frame(next));
+      this.scheduleFrame();
     }
   }
 

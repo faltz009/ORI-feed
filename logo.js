@@ -9,7 +9,10 @@
   // Resolve from logo.js itself so the same badge works on both the root feed
   // page and the nested ORI-report page.
   const assetBase = document.currentScript?.src || document.baseURI;
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  // The display canvas only ever draws; pixel reading happens once on the
+  // offscreen canvas in buildParticles, so no willReadFrequently hint here —
+  // that hint can push the canvas off GPU acceleration.
+  const ctx = canvas.getContext("2d");
   let W, H;
 
   let particles = [];
@@ -99,6 +102,9 @@
     if (!window._oriImg) return;
     const img = window._oriImg;
     particles = [];
+    // A hidden badge (display:none on phones) measures 0×0; sampling a
+    // zero-size canvas throws. refresh() rebuilds when it becomes visible.
+    if (!W || !H) return;
 
     const scale = Math.min((W * 0.88) / img.width, (H * 0.88) / img.height, 1);
     const iw = Math.floor(img.width * scale);
@@ -108,7 +114,7 @@
 
     const oc = document.createElement("canvas");
     oc.width = iw; oc.height = ih;
-    const octx = oc.getContext("2d");
+    const octx = oc.getContext("2d", { willReadFrequently: true });
     octx.drawImage(img, 0, 0, iw, ih);
     const data = octx.getImageData(0, 0, iw, ih).data;
 
@@ -126,6 +132,7 @@
   }
 
   function render() {
+    if (!running) return;  // parked while the badge is hidden
     // Remove a fraction of the previous frame's alpha instead of painting a
     // page-specific background color. Old particles still leave soft trails,
     // while the canvas itself remains genuinely transparent.
@@ -137,6 +144,45 @@
     particles.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(render);
   }
+
+  // ~2000 particles are pure decoration; simulate them only while the badge
+  // is actually on screen (it is display:none on phones), and give
+  // reduced-motion users a motionless ring instead of an animation.
+  let running = false;
+  let shown = false;
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+
+  function drawStill() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => p.draw());
+  }
+
+  function refresh() {
+    // The badge may have been hidden (zero-size) when the image decoded;
+    // measure and sample it again now that it is actually on screen.
+    if (shown && !particles.length) {
+      resize();
+      buildParticles();
+    }
+    if (!particles.length) return;         // image not decoded yet, or hidden
+    if (reducedMotion.matches) {
+      running = false;
+      if (shown) drawStill();
+      return;
+    }
+    if (shown && !running) {
+      running = true;
+      requestAnimationFrame(render);
+    } else if (!shown) {
+      running = false;
+    }
+  }
+
+  new IntersectionObserver(entries => {
+    shown = entries.some(entry => entry.isIntersecting);
+    refresh();
+  }).observe(canvas);
+  reducedMotion.addEventListener?.("change", refresh);
 
   canvas.addEventListener("pointermove", e => {
     const r = canvas.getBoundingClientRect();
@@ -153,7 +199,7 @@
   img.onload = () => {
     window._oriImg = img;
     buildParticles();
-    render();
+    refresh();  // the observer may have fired before particles existed
   };
   img.src = new URL("assets/gradient-circle.png", assetBase).href;
 })();

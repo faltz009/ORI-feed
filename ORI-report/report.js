@@ -590,9 +590,6 @@ function initializeWeather(report) {
     calendar: document.getElementById("calendar-reel"),
     readout: document.getElementById("semantic-readout")
   });
-  if (matchMedia("(prefers-reduced-motion:reduce)").matches) {
-    window.memeticWeather.playing = false;
-  }
 }
 
 function initializeTimeline(report) {
@@ -641,7 +638,10 @@ function initializeDeck() {
     }
   };
 
+  let activeId = null;
   const activate = id => {
+    if (id === activeId) return;
+    activeId = id;
     chapters.forEach(chapter => chapter.classList.toggle("is-active", chapter.id === id));
     buttons.forEach(button =>
       button.setAttribute("aria-current", button.dataset.target === id ? "true" : "false")
@@ -657,14 +657,18 @@ function initializeDeck() {
   });
   activate(chapters[0].id);
 
-  // Intersection state drives both the navigation marker and canvas pause.
-  const observer = new IntersectionObserver(entries => {
-    const visible = entries
-      .filter(entry => entry.isIntersecting)
-      .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
-    if (visible && visible.intersectionRatio > 0.45) activate(visible.target.id);
-  }, { root: deck, threshold: [0.25, 0.5, 0.75] });
-  chapters.forEach(chapter => observer.observe(chapter));
+  // The chapter under the middle of the viewport drives the navigation
+  // marker and canvas pause. On phones a chapter grows several screens tall,
+  // so a chapter-relative intersection ratio would never cross a threshold.
+  // Handlers are assigned (not added) so a server switch replaces them.
+  deck.onscroll = () => {
+    const center = deck.scrollTop + deck.clientHeight / 2;
+    let bottom = 0;
+    for (const chapter of chapters) {
+      bottom += chapter.offsetHeight;
+      if (center < bottom) return activate(chapter.id);
+    }
+  };
 
   const scrollToHash = () => {
     const target = location.hash ? document.querySelector(location.hash) : null;
@@ -674,15 +678,15 @@ function initializeDeck() {
     }
   };
   requestAnimationFrame(() => requestAnimationFrame(scrollToHash));
-  addEventListener("hashchange", scrollToHash);
-  addEventListener("keydown", event => {
+  onhashchange = scrollToHash;
+  onkeydown = event => {
     if (/INPUT|BUTTON/.test(event.target.tagName) ||
         !["ArrowDown", "ArrowUp", "PageDown", "PageUp"].includes(event.key)) return;
     const current = Math.max(0, chapters.findIndex(chapter => chapter.classList.contains("is-active")));
     const direction = /Down/.test(event.key) ? 1 : -1;
     scrollChapter(chapters[Math.max(0, Math.min(chapters.length - 1, current + direction))]);
     event.preventDefault();
-  });
+  };
 }
 
 document.getElementById("filter-button").onclick = () =>
