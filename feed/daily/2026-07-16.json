@@ -1,0 +1,467 @@
+{
+ "generated": "2026-07-16T10:06:25Z",
+ "window_hours": 24,
+ "all_history": false,
+ "message_count": 26,
+ "channels_skipped_no_access": 2,
+ "servers": [
+  {
+   "name": "ORI 1.0 (2025)",
+   "id": "1344300408893345863",
+   "icon": "https://cdn.discordapp.com/icons/1344300408893345863/6736f5a7aaeedb531cf0950ecb31cd52.png?size=128",
+   "coverage": {
+    "targets": 659,
+    "public_archived_threads": 540,
+    "private_archived_threads": 0,
+    "private_archived_scope": "joined_only"
+   }
+  },
+  {
+   "name": "ORI 2.0",
+   "id": "1510645022645555321",
+   "icon": "https://cdn.discordapp.com/icons/1510645022645555321/c2ab2370219aeb4070a10a858369c733.png?size=128",
+   "coverage": {
+    "targets": 6,
+    "public_archived_threads": 0,
+    "private_archived_threads": 0,
+    "private_archived_scope": "joined_only"
+   }
+  }
+ ],
+ "messages": [
+  {
+   "user": "O_oNevermore",
+   "message": "whenever you are doing literally any task, a part of you is pinging toward purpose, it is asking \"why are we doing this?\"  and if the purpose is not clear, this part will produce dissonance (btw any method of ignoring the purpose of a task and doing it anyway is coercion)\n\nsometimes a reason can be consequential, you want to avoid a bad outcome or chase a good one, sometimes it can be rational, it is our best theory based on our epistemic criteria, and sometimes it can be \"there is no reason, the reason is we have faith\" but this is misunderstood, this just means \"we have determined this story is worth taking seriously\"\n\nfaith just means you are taking a story seriously\n\nyou can take a story seriously for many reasons, you evaluate it just like you should evaluate any other story and you determine whether it's worth taking seriously or not via various aesthetic judgments or otherwise (we don't yet have an explicit analog of epistemic criteria for stories or art, we do have quite some implicit knowledge about it tho)\n\nand that's what we do with rational ideas too, we take them seriously, and here too, there is no ultimate reason why we do so, that would be justificationism or foundationalism, we have evolving epistemic criteria as means of judging which ideas to take seriously\n\nmaking the divide between story and rational idea is a misnomer too, it is rational to take our best stories seriously",
+   "timestamp": "2026-07-15T10:37:37.163000+00:00",
+   "channel": "✍️eval-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1526900539944730645",
+   "user_id": "discord:335107602243518466",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1409673828673523762/1526900539944730645",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "reactions": [
+    {
+     "emoji": "🔥",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "user": "Ματταθίας",
+   "message": "<@222412564825374721> want to set up a call sometime soon for 30 min?",
+   "timestamp": "2026-07-15T12:28:50.892000+00:00",
+   "channel": "🧙🔬ματταθίας-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1526928531592974337",
+   "user_id": "discord:548031734810411021",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1505588498596630751/1526928531592974337",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Ματταθίας",
+   "message": "want to meet and see waht you're working on with psychology",
+   "timestamp": "2026-07-15T12:29:14.823000+00:00",
+   "channel": "🧙🔬ματταθίας-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1526928631966859275",
+   "user_id": "discord:548031734810411021",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1505588498596630751/1526928631966859275",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "windowsupdatenowwhy",
+   "message": "",
+   "timestamp": "2026-07-15T12:36:56.579000+00:00",
+   "channel": "general",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1526930568712028264",
+   "user_id": "discord:793822890087940096",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1526930568712028264",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "reactions": [
+    {
+     "emoji": "🔥",
+     "count": 2
+    }
+   ],
+   "type": 7
+  },
+  {
+   "user": "Mechalucard",
+   "message": "I'm thinking that emotional response might be the best way to categorize music in general.",
+   "timestamp": "2026-07-15T15:13:01.115000+00:00",
+   "channel": "✍️eval-log",
+   "thread": null,
+   "reply_to": "discord:1526812387636678657",
+   "id": "discord:1526969846422573067",
+   "user_id": "discord:98605036208152576",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1409673828673523762/1526969846422573067",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Mechalucard",
+   "message": "The coercion point is spot on",
+   "timestamp": "2026-07-15T15:13:42.387000+00:00",
+   "channel": "✍️eval-log",
+   "thread": null,
+   "reply_to": "discord:1526900539944730645",
+   "id": "discord:1526970019530018986",
+   "user_id": "discord:98605036208152576",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1409673828673523762/1526970019530018986",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "The 24/7 Livestream is cool <@1024417977111691305>",
+   "timestamp": "2026-07-15T17:18:19.959000+00:00",
+   "channel": "kattt-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527001382740164728",
+   "user_id": "discord:228707291317141504",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1425960592195321907/1527001382740164728",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "reactions": [
+    {
+     "emoji": "💜",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "https://x.com/i/broadcasts/1nxeLLljAkLJX",
+   "timestamp": "2026-07-15T17:18:40.783000+00:00",
+   "channel": "kattt-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527001470082486322",
+   "user_id": "discord:228707291317141504",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1425960592195321907/1527001470082486322",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "reactions": [
+    {
+     "emoji": "💜",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "user": "Kattt",
+   "message": "tyyyy",
+   "timestamp": "2026-07-15T18:02:45.559000+00:00",
+   "channel": "kattt-log",
+   "thread": null,
+   "reply_to": "discord:1527001382740164728",
+   "id": "discord:1527012563076907209",
+   "user_id": "discord:1024417977111691305",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1425960592195321907/1527012563076907209",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Kattt",
+   "message": "i think so too",
+   "timestamp": "2026-07-15T18:02:47.098000+00:00",
+   "channel": "kattt-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527012569531944971",
+   "user_id": "discord:1024417977111691305",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1425960592195321907/1527012569531944971",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Kattt",
+   "message": "its been a lot of fun",
+   "timestamp": "2026-07-15T18:02:50.263000+00:00",
+   "channel": "kattt-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527012582807048353",
+   "user_id": "discord:1024417977111691305",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1425960592195321907/1527012582807048353",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "sasenchal",
+   "message": "On the Substack - I think around observer theory predictions confirmed article",
+   "timestamp": "2026-07-15T18:35:54.017000+00:00",
+   "channel": "✡️⛩️samsenchal-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527020903274254346",
+   "user_id": "discord:1250084478152478773",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1399048923708002394/1527020903274254346",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "reactions": [
+    {
+     "emoji": "🙏",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "user": "Othmangba",
+   "message": "Gracias",
+   "timestamp": "2026-07-15T20:05:13.202000+00:00",
+   "channel": "✡️⛩️samsenchal-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527043381325332654",
+   "user_id": "discord:444315420351266847",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1399048923708002394/1527043381325332654",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "https://x.com/i/status/2077458394865430546",
+   "timestamp": "2026-07-15T21:39:36.825000+00:00",
+   "channel": "✍️defenders-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527067136281809026",
+   "user_id": "discord:228707291317141504",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344687791451275356/1527067136281809026",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "ben gladstone",
+   "message": "i bet someone could build that",
+   "timestamp": "2026-07-15T21:44:27.335000+00:00",
+   "channel": "milady",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527068354769326121",
+   "user_id": "discord:538505353428729876",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1510645022645555321/1524993483922866226/1527068354769326121",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 2.0"
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "Why are people upset at this article",
+   "timestamp": "2026-07-15T21:52:04.751000+00:00",
+   "channel": "✍️defenders-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527070273311084604",
+   "user_id": "discord:228707291317141504",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344687791451275356/1527070273311084604",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "https://x.com/i/status/2077491667104379124",
+   "timestamp": "2026-07-15T21:52:18.076000+00:00",
+   "channel": "✍️defenders-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527070329200050282",
+   "user_id": "discord:228707291317141504",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344687791451275356/1527070329200050282",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "https://x.com/i/status/2077438735868899365",
+   "timestamp": "2026-07-15T22:05:49.722000+00:00",
+   "channel": "✍️defenders-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527073733489983508",
+   "user_id": "discord:228707291317141504",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344687791451275356/1527073733489983508",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "sasenchal",
+   "message": "https://www.youtube.com/watch?v=07jmttVw2Yo\n\nORI heard it here first. SW basically stating more and more of my metaphysics 😄",
+   "timestamp": "2026-07-15T22:47:14.787000+00:00",
+   "channel": "✡️⛩️samsenchal-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527084156608315442",
+   "user_id": "discord:1250084478152478773",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1399048923708002394/1527084156608315442",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "reactions": [
+    {
+     "emoji": "🔥",
+     "count": 2
+    }
+   ]
+  },
+  {
+   "user": "Hazor",
+   "message": "",
+   "timestamp": "2026-07-16T01:04:18.599000+00:00",
+   "channel": "✍️walter-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527118649775886446",
+   "user_id": "discord:95614482352439296",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1527118649775886446",
+   "attachments": [
+    {
+     "name": "image.png",
+     "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1527118649440210964/image.png?ex=6a597f92&is=6a582e12&hm=7424155f37e55d0ad6a111a62e0ff3f2da75b7919b80d1482e914429f097a3d1&",
+     "bytes": 26128,
+     "file": "feed/media/1527118649440210964-image.png"
+    }
+   ],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Hazor",
+   "message": "Did anyone expect aella to be one of ORI's most used odd words? lmao",
+   "timestamp": "2026-07-16T01:04:37.559000+00:00",
+   "channel": "✍️walter-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527118729299759146",
+   "user_id": "discord:95614482352439296",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1527118729299759146",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Hazor",
+   "message": "<@1221182134950301706>",
+   "timestamp": "2026-07-16T01:04:42.773000+00:00",
+   "channel": "✍️walter-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527118751168856224",
+   "user_id": "discord:95614482352439296",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1527118751168856224",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "https://x.com/i/status/2077574704731164874",
+   "timestamp": "2026-07-16T02:03:13.203000+00:00",
+   "channel": "✍️defenders-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527133474979315793",
+   "user_id": "discord:228707291317141504",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344687791451275356/1527133474979315793",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "",
+   "timestamp": "2026-07-16T02:03:22.678000+00:00",
+   "channel": "✝️🌅sunriseoath-log",
+   "thread": null,
+   "reply_to": "discord:1527133474979315793",
+   "id": "discord:1527133514720477276",
+   "user_id": "discord:228707291317141504",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1492853438734925874/1527133514720477276",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "Omar Shehata",
+   "message": "https://x.com/i/status/2077512593543995630",
+   "timestamp": "2026-07-16T02:56:40.505000+00:00",
+   "channel": "✍️defenders-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527146927379054754",
+   "user_id": "discord:228707291317141504",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344687791451275356/1527146927379054754",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  },
+  {
+   "user": "O_oNevermore",
+   "message": "was thinking the opposite of a mind virus is a pro social contagion",
+   "timestamp": "2026-07-16T09:50:27.636000+00:00",
+   "channel": "✍️defenders-log",
+   "thread": null,
+   "reply_to": null,
+   "id": "discord:1527251059914051594",
+   "user_id": "discord:335107602243518466",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344687791451275356/1527251059914051594",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)"
+  }
+ ]
+}
