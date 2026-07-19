@@ -736,7 +736,7 @@ function loadServer(entry) {
     apply(reportCache[entry.id]);
     return;
   }
-  fetch(`data/${entry.file}`)
+  fetch(`data/${entry.file}`, { cache: "no-store" })
     .then(response => {
       if (!response.ok) throw Error(`data/${entry.file} not found — rerun build.py`);
       return response.json();
@@ -750,7 +750,7 @@ function loadServer(entry) {
 
 // servers.json is the only report entry point. Every server is reduced by the
 // same builder and gets the same weather-<server-id>.json contract.
-fetch("data/servers.json")
+fetch("data/servers.json", { cache: "no-store" })
   .then(response => {
     if (!response.ok) throw Error("Run python3 ORI-report/build.py first");
     return response.json();

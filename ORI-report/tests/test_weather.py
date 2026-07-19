@@ -1,5 +1,6 @@
 import json
 import sys
+import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -53,6 +54,25 @@ class WeatherTests(unittest.TestCase):
                 attachments=[],
             )
         return analyzer
+
+    def test_bundled_reference_recognizes_broad_english(self):
+        reference = ReferenceData.load(BASE / "data" / "reference")
+        analyzer = WeatherAnalyzer(30, CONFIG)
+        for word in ("little", "well", "work", "system", "use", "year", "possible"):
+            with self.subTest(word=word):
+                self.assertGreater(reference.word_rate(word) * 1_000_000, 150)
+                self.assertFalse(
+                    analyzer.aboutness_word(word, reference, lift=100_000),
+                    "a broad-English word must not become weather even at extreme local lift",
+                )
+
+    def test_reference_loader_fails_closed_on_incomplete_data(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            (directory / "count_1w.txt").write_text("well\t1\n", encoding="utf-8")
+            (directory / "count_2w.txt").write_text("very well\t1\n", encoding="utf-8")
+            with self.assertRaisesRegex(RuntimeError, "integrity check"):
+                ReferenceData.load(directory)
 
     def semantic_pass(self, analyzer, reference, messages, aliases=frozenset()):
         """Replay test messages after their phrase inventory is discovered."""
