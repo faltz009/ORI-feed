@@ -223,9 +223,9 @@ let DATA = null, channel = null, query = "", serverFilter = null;
 
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const linkify = s => s.replace(/(https?:\/\/[^\s<]+)/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
-// Discord mention IDs are provenance, not useful reading labels. The feed has
-// no target-name lookup table, so render their type honestly without exposing
-// an opaque numeric snowflake in the conversation body.
+// Newly collected user mentions are resolved by feed.py while Discord's
+// per-message mention data is available. These fallbacks cover older records
+// and unresolved role/channel IDs without exposing opaque snowflakes.
 const readableMentions = s => s
   .replace(/<@&\d+>/g, "@role")
   .replace(/<@!?\d+>/g, "@member")

@@ -135,9 +135,32 @@ def member_aliases(guild_id):
         after = str((members[-1].get("user") or {}).get("id") or after)
 
 
-def slug(name):
-    s = re.sub(r"[^\w\s-]", "", name).strip().lower()
-    return re.sub(r"[-\s]+", "-", s) or "server"
+def resolve_member_mentions(content, mentions):
+    """Render Discord user snowflakes as the names readers see in Discord.
+
+    Discord keeps ``<@user-id>`` in message content and supplies the matching
+    user objects separately.  The normalized feed is a human-readable record,
+    so join those two parts while the complete API message is still available.
+    Unknown mention IDs remain untouched and the viewer can render a generic
+    fallback without inventing an identity.
+    """
+    names = {}
+    for mention in mentions or []:
+        user_id = str(mention.get("id") or "")
+        member = mention.get("member") or {}
+        name = (
+            member.get("nick")
+            or mention.get("global_name")
+            or mention.get("username")
+        )
+        if user_id and name:
+            names[user_id] = name
+
+    def replace(match):
+        name = names.get(match.group(1))
+        return f"@{name}" if name else match.group(0)
+
+    return re.sub(r"<@!?(\d+)>", replace, content or "")
 
 
 def normalize(
@@ -151,7 +174,9 @@ def normalize(
 ):
     rec = {
         "user": m["author"].get("global_name") or m["author"].get("username", "?"),
-        "message": redact_credentials(m.get("content", "")),
+        "message": redact_credentials(resolve_member_mentions(
+            m.get("content", ""), m.get("mentions", [])
+        )),
         "timestamp": m.get("timestamp"),
         "channel": channel_name,
         "channel_id": "discord:" + channel_id,
@@ -200,6 +225,12 @@ def archived_threads(channel_id, visibility, stop_before=None):
     visibility is ``public``, ``private``, or ``joined_private``. The private
     route requires Manage Threads; joined_private is the read-only fallback
     and only returns private threads the bot was explicitly added to.
+
+    ``stop_before`` (unix seconds) bounds the walk to the collection window:
+    a thread archived before that moment cannot contain in-window messages,
+    so it is neither returned nor pulled from later. Discord orders these
+    pages newest-archived first, which lets the walk stop at the first
+    out-of-window thread instead of enumerating the entire archive.
     """
     if visibility == "public":
         route = f"/channels/{channel_id}/threads/archived/public"
@@ -222,23 +253,30 @@ def archived_threads(channel_id, visibility, stop_before=None):
         if err is not None:
             return found, err
         batch = data.get("threads", [])
-        found.extend(batch)
+        for thread in batch:
+            if stop_before:
+                stamp = (thread.get("thread_metadata") or {}).get("archive_timestamp")
+                try:
+                    archived_at = datetime.fromisoformat(
+                        (stamp or "").replace("Z", "+00:00")
+                    ).timestamp()
+                except ValueError:
+                    archived_at = None  # malformed stamp: keep the thread
+                if archived_at is not None and archived_at < stop_before:
+                    if cursor_kind == "timestamp":
+                        # Newest-archived first: this thread and everything
+                        # after it are out of window; the walk is complete.
+                        return found, None
+                    # The joined-private route pages by thread ID, not archive
+                    # time, so later pages can still hold in-window threads:
+                    # drop this one but keep walking.
+                    continue
+            found.append(thread)
         if not data.get("has_more") or not batch:
             return found, None
         last = batch[-1]
-        if cursor_kind == "timestamp":
-            before = (last.get("thread_metadata") or {}).get("archive_timestamp")
-            if stop_before and before:
-                try:
-                    archive_time = datetime.fromisoformat(
-                        before.replace("Z", "+00:00")
-                    ).timestamp()
-                    if archive_time < stop_before:
-                        return found, None
-                except ValueError:
-                    pass
-        else:
-            before = last["id"]
+        before = ((last.get("thread_metadata") or {}).get("archive_timestamp")
+                  if cursor_kind == "timestamp" else last["id"])
 
 
 def download_media(records):
@@ -350,7 +388,10 @@ def main(all_history=False, guild_filter=None):
                 )
                 if private_err == 403:
                     private_scope = "joined_only"
-                    private, private_err = archived_threads(parent["id"], "joined_private")
+                    private, private_err = archived_threads(
+                        parent["id"], "joined_private",
+                        stop_before=None if all_history else since,
+                    )
                 if private_err not in (None, 403, 404):
                     print(f"[{gname}] #{parent['name']} private archive: HTTP {private_err}")
                 private_archived.extend(private)
@@ -438,9 +479,10 @@ def main(all_history=False, guild_filter=None):
         # rolling feed into a many-megabyte historical dump.
         print("backfill complete; feed/feed.json remains the rolling view")
         return
+    # Only windowed runs reach this point; --all-history returned above.
     combined = {"generated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                "window_hours": None if all_history else WINDOW_HOURS,
-                "all_history": all_history,
+                "window_hours": WINDOW_HOURS,
+                "all_history": False,
                 "message_count": len(everything),
                 "channels_skipped_no_access": skipped_total,
                 "servers": server_meta,

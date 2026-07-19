@@ -18,6 +18,7 @@ import os
 from collections import defaultdict
 from pathlib import Path
 from typing import Iterable, Iterator
+from urllib.parse import urlsplit
 
 
 def partition_for(record: dict) -> str:
@@ -44,12 +45,45 @@ def _read_partition(path: Path) -> dict[str, dict]:
     return records
 
 
+def _attachment_key(attachment: dict) -> str:
+    """Stable identity for one attachment across collections.
+
+    Discord CDN links carry rotating signature query parameters, so only the
+    URL path (attachment ID + filename) identifies the same attachment twice.
+    """
+    return urlsplit(str(attachment.get("url") or "")).path
+
+
+def _preserve_attachment_files(previous: dict, incoming: dict) -> None:
+    """Carry local media paths forward when a re-observation lacks them.
+
+    A MEDIA=0 collection re-emits attachments without the ``file`` field even
+    though the downloaded copy on disk is still valid. The newest record wins
+    everywhere else; forgetting the local path would orphan the file behind
+    an expiring CDN link.
+    """
+    known = {
+        _attachment_key(attachment): attachment["file"]
+        for attachment in previous.get("attachments") or []
+        if attachment.get("file")
+    }
+    if not known:
+        return
+    for attachment in incoming.get("attachments") or []:
+        if not attachment.get("file"):
+            local_path = known.get(_attachment_key(attachment))
+            if local_path:
+                attachment["file"] = local_path
+
+
 def merge_records(directory: Path | str, incoming: Iterable[dict]) -> dict:
     """Merge records into monthly partitions and return a compact receipt.
 
     Existing IDs are replaced with the newest normalized representation. This
     lets reaction totals or attachment metadata improve on a later collection
-    without duplicating the underlying message.
+    without duplicating the underlying message. The one exception is durable
+    attachment enrichment: a local ``file`` path survives re-observations
+    that lack it (see _preserve_attachment_files).
     """
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=True)
@@ -68,6 +102,11 @@ def merge_records(directory: Path | str, incoming: Iterable[dict]) -> dict:
         for record in batch:
             key = str(record["id"])
             previous = records.get(key)
+            if previous is not None:
+                # Enrich before comparing: a record whose only difference was
+                # a missing local path counts as unchanged, so MEDIA=0 runs
+                # do not rewrite otherwise-identical partitions.
+                _preserve_attachment_files(previous, record)
             if previous is None:
                 added += 1
                 changed = True
@@ -124,23 +163,3 @@ def iter_records(
                     continue
                 seen.add(message_id)
                 yield record
-
-
-def corpus_stats(directory: Path | str) -> dict:
-    """Summarize the stored corpus without retaining message content."""
-    messages = 0
-    servers = defaultdict(int)
-    first = last = None
-    for record in iter_records(directory):
-        messages += 1
-        servers[record.get("server") or "?"] += 1
-        timestamp = record.get("timestamp")
-        if timestamp:
-            first = min(first or timestamp, timestamp)
-            last = max(last or timestamp, timestamp)
-    return {
-        "messages": messages,
-        "servers": dict(sorted(servers.items())),
-        "from": first,
-        "to": last,
-    }

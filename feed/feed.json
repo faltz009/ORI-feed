@@ -1,8 +1,8 @@
 {
- "generated": "2026-07-19T08:03:15Z",
+ "generated": "2026-07-19T13:15:34Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 41,
+ "message_count": 39,
  "channels_skipped_no_access": 2,
  "servers": [
   {
@@ -244,150 +244,6 @@
  ],
  "messages": [
   {
-   "user": "windowsupdatenowwhy",
-   "message": "But, he envies it and copies it and gives my brilliant ideas to his friends",
-   "timestamp": "2026-07-18T10:46:12.194000+00:00",
-   "channel": "general",
-   "channel_id": "discord:1344300408893345866",
-   "thread": "envy / unearned hatred / mimetic panic and obsession",
-   "thread_id": "discord:1527656846687735938",
-   "reply_to": null,
-   "id": "discord:1527989863738245185",
-   "user_id": "discord:793822890087940096",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1527656846687735938/1527989863738245185",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "windowsupdatenowwhy",
-   "message": "And gatekeeps me",
-   "timestamp": "2026-07-18T10:46:28.116000+00:00",
-   "channel": "general",
-   "channel_id": "discord:1344300408893345866",
-   "thread": "envy / unearned hatred / mimetic panic and obsession",
-   "thread_id": "discord:1527656846687735938",
-   "reply_to": null,
-   "id": "discord:1527989930519822388",
-   "user_id": "discord:793822890087940096",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1527656846687735938/1527989930519822388",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "Ματταθίας",
-   "message": "i read mein kampf when i was 12",
-   "timestamp": "2026-07-18T11:48:00.324000+00:00",
-   "channel": "🧙🔬ματταθίας-log",
-   "channel_id": "discord:1505588498596630751",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1528005416762740746",
-   "user_id": "discord:548031734810411021",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1505588498596630751/1528005416762740746",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "Ματταθίας",
-   "message": "not offended to be associated with these books",
-   "timestamp": "2026-07-18T11:48:09.162000+00:00",
-   "channel": "🧙🔬ματταθίας-log",
-   "channel_id": "discord:1505588498596630751",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1528005453831999660",
-   "user_id": "discord:548031734810411021",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1505588498596630751/1528005453831999660",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "Ματταθίας",
-   "message": "I would read any book basically",
-   "timestamp": "2026-07-18T11:48:17.896000+00:00",
-   "channel": "🧙🔬ματταθίας-log",
-   "channel_id": "discord:1505588498596630751",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1528005490464919552",
-   "user_id": "discord:548031734810411021",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1505588498596630751/1528005490464919552",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "Ματταθίας",
-   "message": "time permitting",
-   "timestamp": "2026-07-18T11:48:20.676000+00:00",
-   "channel": "🧙🔬ματταθίας-log",
-   "channel_id": "discord:1505588498596630751",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1528005502125080676",
-   "user_id": "discord:548031734810411021",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1505588498596630751/1528005502125080676",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "zby",
-   "message": "Are you guys under attack? Why creating issues is restricted in https://github.com/Open-Research-Institute/onboarding/issues?",
-   "timestamp": "2026-07-18T11:59:22.389000+00:00",
-   "channel": "general",
-   "channel_id": "discord:1344300408893345866",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1528008277550567547",
-   "user_id": "discord:416623820917440512",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1528008277550567547",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "Omar Shehata",
-   "message": "Hmm, that's not expected. What does it say? (Like is it implied that the repo has issues turned off as a setting?)",
-   "timestamp": "2026-07-18T13:01:14.276000+00:00",
-   "channel": "general",
-   "channel_id": "discord:1344300408893345866",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": "discord:1528008277550567547",
-   "id": "discord:1528023846333190144",
-   "user_id": "discord:228707291317141504",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1528023846333190144",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0 (2025)",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
    "user": "Omar Shehata",
    "message": "and you are (or have been) willing to give creatively, and he was happy to receive, but at some point you realized it was draining you?",
    "timestamp": "2026-07-18T13:18:37.647000+00:00",
@@ -425,7 +281,7 @@
   },
   {
    "user": "Omar Shehata",
-   "message": "I do like these categories a lot that <@177129656611373056> has in his server",
+   "message": "I do like these categories a lot that @Tim has in his server",
    "timestamp": "2026-07-18T13:41:02.539000+00:00",
    "channel": "bottom-floor",
    "channel_id": "discord:1524429008664657950",
@@ -440,8 +296,7 @@
     {
      "name": "Screenshot_20260718-094030.png",
      "url": "https://cdn.discordapp.com/attachments/1524429008664657950/1528033862792253440/Screenshot_20260718-094030.png?ex=6a5d7cae&is=6a5c2b2e&hm=7e87d94f5d1fee9feb29dd667dc65cc78b88c5681c3a655e6490f8dc8f8ecded&",
-     "bytes": 428398,
-     "file": "feed/media/1528033862792253440-Screenshot_20260718-094030.png"
+     "bytes": 428398
     }
    ],
    "platform": "discord",
@@ -496,7 +351,7 @@
   },
   {
    "user": "Omar Shehata",
-   "message": "<@95614482352439296>",
+   "message": "@Hazor",
    "timestamp": "2026-07-18T13:43:35.616000+00:00",
    "channel": "bottom-floor",
    "channel_id": "discord:1524429008664657950",
@@ -650,7 +505,7 @@
   },
   {
    "user": "Omar Shehata",
-   "message": "Can't get over how perfectly this book you gifted me captures everything I'm thinking about right now <@849747845536022548> \n\nEven the language here, which I'd describe as \"live player\". And \"cursing the darkness\" vs shining a light",
+   "message": "Can't get over how perfectly this book you gifted me captures everything I'm thinking about right now @Shadow_Rebbe \n\nEven the language here, which I'd describe as \"live player\". And \"cursing the darkness\" vs shining a light",
    "timestamp": "2026-07-18T15:25:16.562000+00:00",
    "channel": "🤡☠️ben-g-log",
    "channel_id": "discord:1483070936667131945",
@@ -665,8 +520,7 @@
     {
      "name": "rn_image_picker_lib_temp_456f460d-8a9f-4c13-a847-37621aa98f83.jpg",
      "url": "https://cdn.discordapp.com/attachments/1483070936667131945/1528060094061875241/rn_image_picker_lib_temp_456f460d-8a9f-4c13-a847-37621aa98f83.jpg?ex=6a5d951c&is=6a5c439c&hm=c24ec85f6076b5000d51fe53709df3def4d46bac1f97979b83458171d7ea7ca4&",
-     "bytes": 5136934,
-     "file": "feed/media/1528060094061875241-rn_image_picker_lib_temp_456f460d-8a9f-4c13-a847-37621aa98f83.jpg"
+     "bytes": 5136934
     }
    ],
    "platform": "discord",
@@ -743,9 +597,8 @@
    "attachments": [
     {
      "name": "image.png",
-     "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1528152968422097130/image.png?ex=6a5d42db&is=6a5bf15b&hm=f86963b935b51cfb81eabe507c03b3943852319dd49ec57954e81597f830f4a9&",
-     "bytes": 739016,
-     "file": "feed/media/1528152968422097130-image.png"
+     "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1528152968422097130/image.png?ex=6a5deb9b&is=6a5c9a1b&hm=8ae864805d45f9293e3e825bb0cd074f7fe25634ad0c04900a76cad4472b1759&",
+     "bytes": 739016
     }
    ],
    "platform": "discord",
@@ -778,7 +631,7 @@
   },
   {
    "user": "Hazor",
-   "message": "<@1221182134950301706> uploading new version to the repo later today for sure!",
+   "message": "@Defender uploading new version to the repo later today for sure!",
    "timestamp": "2026-07-18T21:34:53.593000+00:00",
    "channel": "✍️walter-log",
    "channel_id": "discord:1392675564074176744",
@@ -847,8 +700,7 @@
     {
      "name": "HNhIhDFWwAABvkw.jpg",
      "url": "https://cdn.discordapp.com/attachments/1505588498596630751/1528249139786416279/HNhIhDFWwAABvkw.jpg?ex=6a5d9c6c&is=6a5c4aec&hm=1b4de2663e38430e6340dcce518e8d17d34b5209d3249f3c1391450c71b5ed34&",
-     "bytes": 32258,
-     "file": "feed/media/1528249139786416279-HNhIhDFWwAABvkw.jpg"
+     "bytes": 32258
     }
    ],
    "platform": "discord",
@@ -950,8 +802,7 @@
     {
      "name": "image.png",
      "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1528265858122645685/image.png?ex=6a5dabfe&is=6a5c5a7e&hm=e02cc614c44a486e1761fbf8313bf7f3269338ba3761e73372aa7f5f890531a5&",
-     "bytes": 962809,
-     "file": "feed/media/1528265858122645685-image.png"
+     "bytes": 962809
     }
    ],
    "platform": "discord",
@@ -975,8 +826,7 @@
     {
      "name": "image.png",
      "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1528265997989970074/image.png?ex=6a5dac1f&is=6a5c5a9f&hm=f7d7f9353433037049bb6b9675febc70572f4dc0284d74f4e17342d28a332cc7&",
-     "bytes": 822512,
-     "file": "feed/media/1528265997989970074-image.png"
+     "bytes": 822512
     }
    ],
    "platform": "discord",
@@ -1000,8 +850,7 @@
     {
      "name": "image.png",
      "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1528266069159182437/image.png?ex=6a5dac30&is=6a5c5ab0&hm=97836f1b90fab3760f5fa9ef051b574f360691c39bf493af0fb13f7170bdb107&",
-     "bytes": 1057275,
-     "file": "feed/media/1528266069159182437-image.png"
+     "bytes": 1057275
     }
    ],
    "platform": "discord",
@@ -1010,7 +859,7 @@
   },
   {
    "user": "Hazor",
-   "message": "<@1221182134950301706>",
+   "message": "@Defender",
    "timestamp": "2026-07-19T05:04:10.849000+00:00",
    "channel": "✍️walter-log",
    "channel_id": "discord:1392675564074176744",
@@ -1057,6 +906,114 @@
    "user_id": "discord:793822890087940096",
    "is_bot": false,
    "url": "https://discord.com/channels/1344300408893345863/1527656846687735938/1528298128292188193",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "server_id": "discord:1344300408893345863"
+  },
+  {
+   "user": "Silent",
+   "message": "v1 is slated to launch early next month",
+   "timestamp": "2026-07-19T09:07:03.431000+00:00",
+   "channel": "metasyns-log",
+   "channel_id": "discord:1344689307897827378",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": "discord:1514141761855946773",
+   "id": "discord:1528327300683268096",
+   "user_id": "discord:1085107383287693342",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344689307897827378/1528327300683268096",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "server_id": "discord:1344300408893345863"
+  },
+  {
+   "user": "Shadow_Rebbe",
+   "message": "Indirectly gives you the advantage that they aren't resentful for owing you one. Which seems like they might be the type.",
+   "timestamp": "2026-07-19T12:26:25.311000+00:00",
+   "channel": "general",
+   "channel_id": "discord:1344300408893345866",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": "discord:1528255337038090401",
+   "id": "discord:1528377472444530689",
+   "user_id": "discord:849747845536022548",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1528377472444530689",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "server_id": "discord:1344300408893345863"
+  },
+  {
+   "user": "windowsupdatenowwhy",
+   "message": "I was told they don't owe me but I don't believe they believe that",
+   "timestamp": "2026-07-19T12:34:58.667000+00:00",
+   "channel": "general",
+   "channel_id": "discord:1344300408893345866",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1528379625615397025",
+   "user_id": "discord:793822890087940096",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1528379625615397025",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "server_id": "discord:1344300408893345863"
+  },
+  {
+   "user": "windowsupdatenowwhy",
+   "message": "But yeah my skills are useful and that is an advantage if that is what you mean",
+   "timestamp": "2026-07-19T12:36:05.201000+00:00",
+   "channel": "general",
+   "channel_id": "discord:1344300408893345866",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1528379904679219281",
+   "user_id": "discord:793822890087940096",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1528379904679219281",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "server_id": "discord:1344300408893345863"
+  },
+  {
+   "user": "windowsupdatenowwhy",
+   "message": "As well as our affinity to each other and shared history",
+   "timestamp": "2026-07-19T12:36:48.770000+00:00",
+   "channel": "general",
+   "channel_id": "discord:1344300408893345866",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1528380087420977162",
+   "user_id": "discord:793822890087940096",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1528380087420977162",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0 (2025)",
+   "server_id": "discord:1344300408893345863"
+  },
+  {
+   "user": "windowsupdatenowwhy",
+   "message": "Hopefully",
+   "timestamp": "2026-07-19T12:36:55.645000+00:00",
+   "channel": "general",
+   "channel_id": "discord:1344300408893345866",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1528380116256948235",
+   "user_id": "discord:793822890087940096",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1528380116256948235",
    "attachments": [],
    "platform": "discord",
    "server": "ORI 1.0 (2025)",

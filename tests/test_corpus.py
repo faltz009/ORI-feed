@@ -30,6 +30,32 @@ class CorpusTests(unittest.TestCase):
             self.assertEqual(records[0]["reactions"][0]["count"], 2)
             self.assertTrue((root / "2026-07.jsonl").exists())
 
+    def test_local_media_paths_survive_reobservation_without_media(self):
+        # MEDIA=0 runs re-emit attachments without their local file path even
+        # though the downloaded copy on disk stays valid. The merge keeps the
+        # path, matching attachments by CDN path because the signature query
+        # rotates between collections.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            enriched = self.record("1", "2026-07-01T00:00:00+00:00")
+            enriched["attachments"] = [{
+                "name": "photo.png",
+                "url": "https://cdn.discordapp.com/attachments/9/8/photo.png?ex=old",
+                "bytes": 100,
+                "file": "feed/media/8-photo.png",
+            }]
+            merge_records(root, [enriched])
+            bare = self.record("1", "2026-07-01T00:00:00+00:00")
+            bare["attachments"] = [{
+                "name": "photo.png",
+                "url": "https://cdn.discordapp.com/attachments/9/8/photo.png?ex=new",
+                "bytes": 100,
+            }]
+            merge_records(root, [bare])
+            record = next(iter_records(root, server_id="discord:guild"))
+            self.assertEqual(record["attachments"][0]["file"], "feed/media/8-photo.png")
+            self.assertIn("ex=new", record["attachments"][0]["url"])
+
     def test_canonical_partitions_remain_plain_jsonl(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

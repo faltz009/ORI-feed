@@ -6,6 +6,26 @@ import feed
 
 
 class FeedTests(unittest.TestCase):
+    def test_member_mentions_are_resolved_to_discord_display_names(self):
+        content = "ask <@42>, <@!84>, and <@999>"
+        mentions = [
+            {
+                "id": "42",
+                "username": "account-name",
+                "global_name": "Global Name",
+                "member": {"nick": "Server Nick"},
+            },
+            {
+                "id": "84",
+                "username": "account-name-2",
+                "global_name": "Second Person",
+            },
+        ]
+        self.assertEqual(
+            feed.resolve_member_mentions(content, mentions),
+            "ask @Server Nick, @Second Person, and <@999>",
+        )
+
     def test_high_confidence_credentials_are_redacted_before_storage(self):
         samples = [
             "sk-" + "a" * 40,
@@ -57,14 +77,26 @@ class FeedTests(unittest.TestCase):
         self.assertEqual(threads, [])
         self.assertEqual(error, 403)
 
-    def test_archive_window_compares_absolute_time_not_local_wall_time(self):
+    def test_archive_window_excludes_threads_archived_before_the_cutoff(self):
+        # 2026-01-02T00:00:00+03:00 is 21:00 UTC — before the 22:00 UTC
+        # cutoff in absolute time even though its wall-clock reads later.
+        # The thread is out of window: it must not become a pull target,
+        # and pagination must stop rather than walk the older archive.
         page = {
-            "threads": [{
-                "id": "20",
-                "thread_metadata": {
-                    "archive_timestamp": "2026-01-02T00:00:00+03:00",
+            "threads": [
+                {
+                    "id": "19",
+                    "thread_metadata": {
+                        "archive_timestamp": "2026-01-02T01:30:00+03:00",
+                    },
                 },
-            }],
+                {
+                    "id": "20",
+                    "thread_metadata": {
+                        "archive_timestamp": "2026-01-02T00:00:00+03:00",
+                    },
+                },
+            ],
             "has_more": True,
         }
         cutoff = datetime(2026, 1, 1, 22, tzinfo=timezone.utc).timestamp()
@@ -73,8 +105,47 @@ class FeedTests(unittest.TestCase):
                 "parent", "public", stop_before=cutoff
             )
         self.assertIsNone(error)
-        self.assertEqual([thread["id"] for thread in threads], ["20"])
+        self.assertEqual([thread["id"] for thread in threads], ["19"])
         api.assert_called_once()
+
+    def test_joined_private_archives_filter_the_window_but_keep_walking(self):
+        # The joined-private route pages by thread ID, not archive time, so
+        # an out-of-window thread is dropped without ending the walk: later
+        # pages can still contain in-window threads.
+        first = {
+            "threads": [
+                {
+                    "id": "30",
+                    "thread_metadata": {
+                        "archive_timestamp": "2026-01-01T12:00:00+00:00",
+                    },
+                },
+                {
+                    "id": "29",
+                    "thread_metadata": {
+                        "archive_timestamp": "2025-12-01T00:00:00+00:00",
+                    },
+                },
+            ],
+            "has_more": True,
+        }
+        second = {
+            "threads": [{
+                "id": "28",
+                "thread_metadata": {
+                    "archive_timestamp": "2026-01-01T13:00:00+00:00",
+                },
+            }],
+            "has_more": False,
+        }
+        cutoff = datetime(2026, 1, 1, tzinfo=timezone.utc).timestamp()
+        with patch.object(feed, "api", side_effect=[(first, None), (second, None)]) as api:
+            threads, error = feed.archived_threads(
+                "parent", "joined_private", stop_before=cutoff
+            )
+        self.assertIsNone(error)
+        self.assertEqual([thread["id"] for thread in threads], ["30", "28"])
+        self.assertIn("before=29", api.call_args_list[-1].args[0])
 
     def test_member_roster_becomes_alias_tokens_not_a_second_message_source(self):
         page = [
