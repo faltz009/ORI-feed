@@ -20,7 +20,7 @@ flowchart LR
     rolling --> feedPage[Live feed page]
     history --> builder[ORI-report/build.py]
     rolling --> builder
-    reference[Norvig word and bigram frequencies] --> analyzer[weather.py]
+    reference[versioned Norvig word and bigram frequencies] --> analyzer[weather.py]
     builder --> analyzer
     analyzer --> validator{Aggregate contains raw fields?}
     validator -->|Yes| fail[Fail the complete build]
@@ -66,6 +66,11 @@ python3 ORI-report/build.py
 
 The daily GitHub workflow performs the same two production operations in the
 same order: run `feed.py`, then run `ORI-report/build.py`.
+
+The broad-English word and bigram tables are versioned under
+`ORI-report/data/reference/` and verified by SHA-256 before analysis. The
+builder fails rather than treating a missing or malformed baseline as evidence
+that every observed word is locally distinctive.
 
 ## Durable data
 
@@ -305,6 +310,7 @@ and documented as a lexicon lens, not presented as a complete alternate report.
 | `ORI-report/topic-timeline.js` | Interactive normalized topic timeline. |
 | `ORI-report/data/servers.json` | Generated server-to-report index. |
 | `ORI-report/data/weather-*.json` | Generated attributed aggregates, one identical schema per server. |
+| `ORI-report/data/reference/` | Versioned and integrity-checked broad-English word and bigram frequencies. |
 | `.github/workflows/feed.yml` | Daily collector → report builder → commit sequence. |
 | `tests/`, `ORI-report/tests/` | Collector, corpus, privacy, and language invariants. |
 

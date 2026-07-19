@@ -13,9 +13,7 @@ import collections
 import hashlib
 import itertools
 import math
-import os
 import re
-import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
@@ -85,8 +83,10 @@ cool sorry thank thanks otherwise piece
 yeah yes yet
 """.split())
 
-WORD_REFERENCE_URL = "https://norvig.com/ngrams/count_1w.txt"
-BIGRAM_REFERENCE_URL = "https://norvig.com/ngrams/count_2w.txt"
+REFERENCE_FILES = {
+    "count_1w.txt": "51df159fd3de12b20e403c108f526e96dbd723d9cabdd5f17955cdc16059e690",
+    "count_2w.txt": "781c0596c3eea532d30bef9f3dba1d5137d652f00376260822c761a7584dfb8c",
+}
 
 # Once a word is two orders of magnitude more common locally, the exact broad
 # corpus ratio no longer tells us anything useful about its importance inside
@@ -196,21 +196,27 @@ class ReferenceData:
 
     @classmethod
     def load(cls, directory: Path) -> "ReferenceData":
-        directory.mkdir(parents=True, exist_ok=True)
         word_path = directory / "count_1w.txt"
         bigram_path = directory / "count_2w.txt"
-        cls._download(word_path, WORD_REFERENCE_URL)
-        cls._download(bigram_path, BIGRAM_REFERENCE_URL)
-        return cls(cls._counts(word_path), cls._counts(bigram_path))
-
-    @staticmethod
-    def _download(path: Path, url: str) -> None:
-        if path.exists():
-            return
-        print(f"downloading reference: {path.name}")
-        temporary = path.with_suffix(path.suffix + ".part")
-        urllib.request.urlretrieve(url, temporary)
-        os.replace(temporary, path)
+        for path in (word_path, bigram_path):
+            if not path.is_file():
+                raise RuntimeError(
+                    f"required language baseline missing: {path}; "
+                    "restore ORI-report/data/reference from the repository"
+                )
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            if digest != REFERENCE_FILES[path.name]:
+                raise RuntimeError(
+                    f"language baseline failed integrity check: {path}"
+                )
+        words = cls._counts(word_path)
+        bigrams = cls._counts(bigram_path)
+        # This is deliberately fail-closed. An empty or malformed reference
+        # makes every ordinary word look infinitely distinctive; publishing
+        # that output would be worse than publishing no report at all.
+        if len(words) < 300_000 or len(bigrams) < 250_000:
+            raise RuntimeError("language baseline parsed incompletely")
+        return cls(words, bigrams)
 
     @staticmethod
     def _counts(path: Path) -> dict[str, int]:
