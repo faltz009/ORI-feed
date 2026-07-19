@@ -1,5 +1,5 @@
 token.txt
 feed.log
 __pycache__/
-english-freq.txt
-first-names.txt
+ORI-report/data/reference/
+ORI-report-*.png

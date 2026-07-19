@@ -14,16 +14,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: validate collector and report
+        run: |
+          python3 -m unittest discover -s tests -q
+          python3 -m unittest discover -s ORI-report/tests -q
+          node --check logo.js
+          node --check ORI-report/report.js
+          node --check ORI-report/memetic-weather.js
+          node --check ORI-report/topic-timeline.js
+
       - name: pull last 24h from Discord
         env:
           DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
         run: python3 feed.py
 
+      - name: build community report
+        run: python3 ORI-report/build.py
+
       - name: commit feed
         run: |
           git config user.name "faltz009"
           git config user.email "walter.h057@gmail.com"
-          git add feed/
+          git add feed/ ORI-report/data/
           git diff --cached --quiet && echo "no changes" && exit 0
           git commit -m "feed $(date -u +%Y-%m-%dT%H:%MZ)"
           git push

@@ -1,10 +1,14 @@
 // ORI ring — faithful port of closure-verification/docs/shatter.js
 // (particulate ring: hover = magnet pull, click/hold = blow, springs back).
-// Changes from the original: dark-grey trail fade instead of white,
-// badge-sized canvas, devicePixelRatio-aware rendering for crispness.
+// Changes from the original: trails fade to actual transparency so the badge
+// works on any page background, plus badge-sized, devicePixelRatio-aware
+// rendering for crispness.
 (function () {
   const canvas = document.getElementById("ori-logo");
   if (!canvas) return;
+  // Resolve from logo.js itself so the same badge works on both the root feed
+  // page and the nested ORI-report page.
+  const assetBase = document.currentScript?.src || document.baseURI;
   const ctx = canvas.getContext("2d", { willReadFrequently: true });
   let W, H;
 
@@ -122,8 +126,14 @@
   }
 
   function render() {
-    ctx.fillStyle = "rgba(20, 25, 31, 0.28)";   // sidebar grey, was white on the closure site
+    // Remove a fraction of the previous frame's alpha instead of painting a
+    // page-specific background color. Old particles still leave soft trails,
+    // while the canvas itself remains genuinely transparent.
+    ctx.save();
+    ctx.globalCompositeOperation = "destination-out";
+    ctx.fillStyle = "rgba(0,0,0,0.28)";
     ctx.fillRect(0, 0, W, H);
+    ctx.restore();
     particles.forEach(p => { p.update(); p.draw(); });
     requestAnimationFrame(render);
   }
@@ -145,5 +155,5 @@
     buildParticles();
     render();
   };
-  img.src = "gradient-circle.png";
+  img.src = new URL("assets/gradient-circle.png", assetBase).href;
 })();

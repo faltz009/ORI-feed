@@ -3,23 +3,42 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
 <title>ORI Feed</title>
+<script>
+document.documentElement.dataset.theme = localStorage.getItem("ori-theme") ||
+  (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+</script>
 <style>
+/* Discord's own palettes: dark (#313338 chat / #2b2d31 sidebar) and light. */
 :root {
-  --bg: hsl(210, 25%, 8%);
-  --fg: #c5c5c5;
-  --sidebar-bg: #14191f;
-  --sidebar-fg: #c8c9db;
-  --muted: #5c6773;
-  --accent: #ffb454;
-  --links: #0096cf;
-  --hover: #191f26;
-  --border: #2d334f;
+  color-scheme: dark;
+  --bg: #313338;
+  --fg: #dbdee1;
+  --sidebar-bg: #2b2d31;
+  --sidebar-fg: #b5bac1;
+  --muted: #949ba4;
+  --accent: #949cf7;
+  --links: #00a8fc;
+  --hover: #393c41;
+  --border: #3f4147;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --fg: #313338;
+  --sidebar-bg: #f2f3f5;
+  --sidebar-fg: #4e5058;
+  --muted: #5c5e66;
+  --accent: #505cdc;
+  --links: #006ce7;
+  --hover: #e9eaec;
+  --border: #dfe1e5;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   background: var(--bg); color: var(--fg);
-  font: 15px/1.55 -apple-system, "Segoe UI", Roboto, "Open Sans", sans-serif;
+  font: 15px/1.55 "gg sans", "Noto Sans", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   display: flex; flex-direction: column; min-height: 100vh;
 }
 a { color: var(--links); text-decoration: none; }
@@ -68,12 +87,12 @@ a:hover { text-decoration: underline; }
 }
 #src-link:hover, #src-link2:hover { color: var(--accent); border-color: var(--accent);
   text-decoration: none; }
-#settings-btn {
+#settings-btn, #theme-btn {
   background: none; border: 1px solid var(--border); border-radius: 4px;
   color: var(--muted); font: inherit; font-size: 12.5px; padding: 4px 14px;
   cursor: pointer;
 }
-#settings-btn:hover { color: var(--accent); border-color: var(--accent); }
+#settings-btn:hover, #theme-btn:hover { color: var(--accent); border-color: var(--accent); }
 #sidebar .server { color: var(--muted); font-size: 11px; text-transform: uppercase;
   letter-spacing: .08em; padding: 14px 20px 4px; }
 #sidebar button {
@@ -93,7 +112,7 @@ a:hover { text-decoration: underline; }
 }
 #search:focus { outline: none; border-color: var(--accent); }
 
-.day { color: var(--accent); font-size: 12px; letter-spacing: .06em;
+.day { color: var(--muted); font-weight: 600; font-size: 12px; letter-spacing: .06em;
   border-bottom: 1px solid var(--border); padding-bottom: 4px; margin: 26px 0 10px; }
 .msg { padding: 7px 10px; border-radius: 4px; }
 .msg:hover { background: var(--hover); }
@@ -152,10 +171,11 @@ a:hover { text-decoration: underline; }
 <header id="top">
   <span class="prod">Discord Feed Viewer</span>
   <div id="server-brand"></div>
-  <a id="src-link" href="report.html" style="margin-left:auto">community report</a>
+  <a id="src-link" href="ORI-report/" style="margin-left:auto">community report</a>
   <a id="src-link2" href="https://github.com/faltz009/ORI-feed"
      target="_blank" rel="noopener">source &amp; setup</a>
   <button id="settings-btn">&#9881; settings</button>
+  <button id="theme-btn" title="switch light/dark theme">&#9789; dark</button>
 </header>
 <div id="layout">
 <nav id="sidebar"></nav>
@@ -203,6 +223,13 @@ let DATA = null, channel = null, query = "", serverFilter = null;
 
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const linkify = s => s.replace(/(https?:\/\/[^\s<]+)/g, u => `<a href="${u}" target="_blank" rel="noopener">${u}</a>`);
+// Discord mention IDs are provenance, not useful reading labels. The feed has
+// no target-name lookup table, so render their type honestly without exposing
+// an opaque numeric snowflake in the conversation body.
+const readableMentions = s => s
+  .replace(/<@&\d+>/g, "@role")
+  .replace(/<@!?\d+>/g, "@member")
+  .replace(/<#\d+>/g, "#channel");
 const isImg = n => /\.(png|jpe?g|gif|webp)$/i.test(n || "");
 const isVid = n => /\.(mp4|webm|mov)$/i.test(n || "");
 
@@ -239,7 +266,7 @@ function render() {
     html += `<div class="msg"><div class="head">` +
       `<a class="user" href="${esc(m.url||"#")}" target="_blank" rel="noopener">${esc(m.user||"?")}</a>` +
       `<span class="time" title="${esc(m.timestamp||"")}">${t}</span>${badges}</div>` +
-      (m.message ? `<div class="body">${linkify(esc(m.message))}</div>` : "") + atts + `</div>`;
+      (m.message ? `<div class="body">${linkify(esc(readableMentions(m.message)))}</div>` : "") + atts + `</div>`;
   }
   box.innerHTML = html;
 }
@@ -329,6 +356,24 @@ $("k-download").onclick = () => {
   a.href = URL.createObjectURL(blob); a.download = "config.json"; a.click();
   URL.revokeObjectURL(a.href);
 };
+
+// --- light/dark theme (shared "ori-theme" key with the report page) ---
+function paintTheme() {
+  const light = document.documentElement.dataset.theme === "light";
+  $("theme-btn").innerHTML = light ? "&#9789; dark" : "&#9788; light";
+}
+$("theme-btn").onclick = () => {
+  const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+  document.documentElement.dataset.theme = next;
+  localStorage.setItem("ori-theme", next);
+  paintTheme();
+};
+matchMedia("(prefers-color-scheme: light)").addEventListener("change", e => {
+  if (localStorage.getItem("ori-theme")) return;
+  document.documentElement.dataset.theme = e.matches ? "light" : "dark";
+  paintTheme();
+});
+paintTheme();
 
 const FEED_URL = new URLSearchParams(location.search).get("feed") || "feed/feed.json";
 fetch(FEED_URL).then(r => {

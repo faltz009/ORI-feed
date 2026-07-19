@@ -1,0 +1,22 @@
+{
+  "guild_id": "1344300408893345863",
+  "window_days": 30,
+  "minimum_word_count": 5,
+  "minimum_phrase_count": 3,
+  "minimum_speakers": 2,
+  "word_reference_minimum_lift": 3.0,
+  "bigram_reference_minimum_lift": 10.0,
+  "trigram_minimum_aboutness_terms": 2,
+  "trend_window_weeks": 13,
+  "topic_minimum_pair_count": 2,
+  "topic_minimum_association": 0.12,
+  "topic_bigram_minimum_count": 5,
+  "topic_bigram_minimum_speakers": 3,
+  "topic_bigram_minimum_days": 2,
+  "topic_maximum_reference_ppm": 150,
+  "topic_minimum_lift": 3.0,
+  "topic_resolution": 1.15,
+  "conversation_resolution": 1.25,
+  "exclude_words": ["lol", "lmao"],
+  "exclude_phrases": []
+}
