@@ -49,11 +49,11 @@ websites site sites app apps webpage web internet wifi username usernames profil
 profiles avatar login notification notifications feed feeds subscribe subscribed
 subscriber subscribers follow follows following followers unfollow upvote upvotes
 downvote comment comments commented meme memes gif gifs emoji emojis hashtag
-stream streaming podcast podcasts spotify patreon paypal venmo crypto bitcoin eth
+stream streaming livestream livestreams podcast podcasts spotify patreon paypal venmo crypto bitcoin eth
 url urls browser chrome firefox android iphone ios laptop desktop pc keyboard
 screenshot screenshots video videos audio mic camera call calls calling voice vc
 chat chats chatting message messages messaged messaging group groups admin admins
-mod mods moderator lurker lurkers
+mod mods moderator lurker lurkers repo repos repository repositories
 """.split())
 
 # Words that carry conversation but rarely say what a conversation is about.
@@ -68,19 +68,19 @@ easier else enough essentially even eventually ever everybody everyone exactly
 entirely etc exist exists explain explained explaining explicitly feel fine
 feels feeling felt get gets getting give gives giving going gone
 fit fits fitted genuinely gonna good got guess guy guys happen happened happening
-generally idk idea ideas imo interesting isnt kinda kind know knows let like likely literally meant might
+generally idk idea ideas imo interesting interested isnt kinda kind know knows let like likely literally meant might
 llm look looks lot lots made make makes making maybe mean means merely mostly much
 necessarily need needed needs nice okay one ones others outcome outcomes
 people person perfect powerful pretty probably quite rather really relevant right
-said say saying says see seeing seem seemed seems sense seriously setting shit simply someone specifically
+said say saying says see seeing seen saw seem seemed seems sense seriously setting shit simply someone specifically
 something somehow sometime sort still stuff supposed sure suspect take takes taking talk ton
 talked talking talks thing things towards
 think thinking thinks thats tho though thought thoughts try trying understand understanding wondering
 understands useful wanna want wanted wants way ways whatever weird willing worth wrong
 particularly hmm toward cant couldnt didnt doesnt shouldnt wasnt werent wouldnt
 arent everything havent hasnt hadnt wont now last years whole sounds two different back forth
-cool sorry thank thanks otherwise piece
-yeah yes yet
+cool sorry thank thanks otherwise piece hear heard mention mentioned
+yeah yes yet situation situations push pushed pushes pushing tend tends tended tending behind
 """.split())
 
 REFERENCE_FILES = {
@@ -93,6 +93,10 @@ REFERENCE_FILES = {
 # the community. Saturating here lets adoption decide among all such words and
 # prevents reference-list sparsity from becoming the ranking algorithm.
 LEXICON_LIFT_SATURATION = 100.0
+ESTABLISHED_BIGRAM_COUNT_MULTIPLIER = 2
+ESTABLISHED_BIGRAM_MINIMUM_LIFT = 100.0
+TOPIC_RELATIVE_RELEVANCE_FLOOR = 0.30
+TOPIC_RENDERING_CEILING = 20
 
 
 def parse_time(value: str | None) -> datetime | None:
@@ -421,8 +425,49 @@ class WeatherAnalyzer:
         if attachments:
             self.symbols["media attachment"] += 1
 
+    def stable_bigram_terms(self, phrases: list[dict]) -> set[str]:
+        """Return current constructions established across the recent quarter.
+
+        The current phrase table remains the admission gate: a construction
+        still needs present-window frequency, voice breadth, association, and
+        broad-web lift.  Recent history only decides whether that already-valid
+        construction has enough continuity to survive the stricter 5-use / 3-
+        voice weather gate.  This keeps literal phrases such as ``observer
+        theory`` atomic while their current pressure ebbs, without creating a
+        second persistent phrase registry.
+        """
+        recent_weeks = sorted(self.history_weekly_tokens)[
+            -int(self.config.get("trend_window_weeks", 13)):
+        ]
+        minimum_count = ESTABLISHED_BIGRAM_COUNT_MULTIPLIER * int(
+            self.config.get("topic_bigram_minimum_count", self.config["minimum_word_count"])
+        )
+        minimum_speakers = int(
+            self.config.get(
+                "topic_bigram_minimum_speakers",
+                max(3, int(self.config["minimum_speakers"])),
+            )
+        )
+        return {
+            row["term"]
+            for row in phrases
+            if row["kind"] == "2gram"
+            and sum(
+                self.history_phrase_weekly[2][row["term"]][week]
+                for week in recent_weeks
+            ) >= minimum_count
+            and len(self.history_phrase_speakers[2][row["term"]]) >= minimum_speakers
+            # Relax the current adoption gate only for constructions whose
+            # whole surface is unmistakably local. Longevity alone must not
+            # promote ordinary conversational frames into atomic weather.
+            and (
+                row["reference_lift"] is None
+                or row["reference_lift"] >= ESTABLISHED_BIGRAM_MINIMUM_LIFT
+            )
+        }
+
     def weather_bigram_rows(self, phrases: list[dict]) -> dict[str, dict]:
-        """Return constructions broad enough to become semantic weather."""
+        """Return current or recently established weather constructions."""
         minimum_count = int(
             self.config.get("topic_bigram_minimum_count", self.config["minimum_word_count"])
         )
@@ -433,13 +478,19 @@ class WeatherAnalyzer:
             )
         )
         minimum_days = int(self.config.get("topic_bigram_minimum_days", 2))
+        established = self.stable_bigram_terms(phrases)
         return {
             row["term"]: row
             for row in phrases
             if row["kind"] == "2gram"
-            and row["count"] >= minimum_count
-            and row["voices"] >= minimum_speakers
             and len(self.phrase_days[2][row["term"]]) >= minimum_days
+            and (
+                (
+                    row["count"] >= minimum_count
+                    and row["voices"] >= minimum_speakers
+                )
+                or row["term"] in established
+            )
         }
 
     def begin_semantic_pass(self, phrases: list[dict]) -> None:
@@ -758,12 +809,12 @@ class WeatherAnalyzer:
     ) -> tuple[list[dict], list[dict]]:
         """Build one semantic graph from qualified words and bigrams.
 
-        Words enter through the broad-English aboutness gate.  Bigrams first
+        Words enter through the broad-English aboutness gate. Bigrams first
         have to pass ``phrase_rows`` (frequency, voice breadth, association,
-        and whole-phrase reference lift), then meet the stricter weather gate:
-        five uses, three voices, and two active dates by default.  This makes
-        ``september event`` a first-class unit without allowing every repeated
-        two-person expression to become atmospheric weather.
+        and whole-phrase reference lift). They then need two active dates plus
+        either strong current adoption or unmistakable local distinctiveness
+        sustained across the recent quarter. This keeps an established phrase
+        atomic while its pressure ebbs without promoting ordinary chat frames.
         """
         if not self.semantic_ready:
             raise RuntimeError("topic analysis requires the phrase-aware semantic replay")
@@ -837,7 +888,14 @@ class WeatherAnalyzer:
         nodes = {word for _interest, word in word_candidates[:240]}
 
         # Qualified bigrams are already atomic observations in this inventory.
-        eligible_bigrams = self.semantic_bigrams
+        # Overlapping qualified bigrams are resolved left-to-right during the
+        # semantic replay. A qualified surface that never became an atomic
+        # observation must not create an empty graph node.
+        eligible_bigrams = {
+            term: row
+            for term, row in self.semantic_bigrams.items()
+            if self.semantic_counts[term]
+        }
         nodes.update(eligible_bigrams)
 
         # Atomic counting prevents duplication; composition edges answer a
@@ -907,29 +965,28 @@ class WeatherAnalyzer:
             graph, float(self.config.get("topic_resolution", 1.15))
         )
         assigned = set().union(*groups) if groups else set()
-        # A qualified bigram already contains an observed semantic relation,
-        # so it may stand alone when its surrounding vocabulary is too diffuse
-        # to pass the graph edge gate. Singleton words do not get this privilege.
-        groups.extend({phrase} for phrase in eligible_bigrams if phrase not in assigned)
+        # Eligibility and topology answer different questions.  A term that
+        # passes the language gates remains a legitimate weather candidate
+        # even when this month supplies no repeated local relationship for it.
+        # Treat it as a singleton family and let the common relevance ranking
+        # decide whether it earns one of the cloud's deliberately scarce slots.
+        groups.extend({term} for term in nodes if term not in assigned)
 
         def ranking_score(term: str) -> float:
             specificity = min(8, max(0, math.log2(max(1, unit_lifts.get(term, 1)))))
-            degree = sum(graph.get(term, {}).values())
             return (
                 math.log1p(unit_counts[term])
                 * math.log1p(len(unit_speakers[term]))
                 * (1 + specificity)
-                * (1 + degree)
             )
 
         topics = []
         for group in groups:
-            if len(group) < 2 and not any(unit_kind.get(term) == "bigram" for term in group):
-                continue
             ranked = sorted(
                 group,
                 key=lambda term: (-ranking_score(term), term),
             )
+            relevance = [ranking_score(term) for term in ranked]
             phrase_labels = [term for term in ranked if unit_kind[term] == "bigram"]
             label_terms = phrase_labels[:1] or ranked[:3]
             label = " · ".join(label_terms)
@@ -982,13 +1039,29 @@ class WeatherAnalyzer:
                 "voices": len(voices),
                 "mentions": sum(unit_counts[term] for term in group),
                 "series": series,
-                "score": sum(unit_counts[term] for term in group) * math.log1p(len(voices)),
+                # Use the same adoption-and-distinctiveness evidence for
+                # connected and standalone fronts. Raw repetitions still own
+                # particle pressure, but no longer decide the visible inventory
+                # by themselves.
+                # One excellent signal can carry a compact front; additional
+                # related terms strengthen it without letting a large cluster
+                # win merely by containing more generic vocabulary.
+                "score": relevance[0] + 0.25 * sum(relevance[1:]),
                 # Internal membership is needed to restrict graph edges to the
-                # twelve visible communities, then removed before serialization.
+                # visible communities, then removed before serialization.
                 "_units": group,
             })
         topics.sort(key=lambda topic: (-topic["score"], topic["label"]))
-        topics = topics[:12]
+        if topics:
+            # Candidate gates are deliberately broad. Keep fronts in the same
+            # relevance order of magnitude as the strongest one, then retain a
+            # hard visual ceiling for pathological input. This adapts to young
+            # servers without erasing additional strong fronts in busy ones.
+            relevance_floor = topics[0]["score"] * TOPIC_RELATIVE_RELEVANCE_FLOOR
+            topics = [
+                topic for topic in topics
+                if topic["score"] >= relevance_floor
+            ][:TOPIC_RENDERING_CEILING]
 
         # The browser graph uses the same statistical edges as clustering, not
         # a second visual-only notion of similarity. Keep a small neighborhood
@@ -1685,11 +1758,15 @@ class WeatherAnalyzer:
             "method": {
                 "configuration": self.config,
                 "lexicon_lift_saturation": LEXICON_LIFT_SATURATION,
+                "established_bigram_count_multiplier": ESTABLISHED_BIGRAM_COUNT_MULTIPLIER,
+                "established_bigram_minimum_lift": ESTABLISHED_BIGRAM_MINIMUM_LIFT,
+                "topic_relative_relevance_floor": TOPIC_RELATIVE_RELEVANCE_FLOOR,
+                "topic_rendering_ceiling": TOPIC_RENDERING_CEILING,
                 "tokenization": "lowercase word surfaces; phrases cannot cross punctuation, URLs, Discord markup, or newlines",
                 "lexicon": "three-times-broad-web eligibility gate; ranked by observed adoption times logarithmic distinctiveness capped at 100x; broad-web comparison shown as expected uses in an equal-size sample",
                 "phrases": "literal adjacent bigrams/trigrams; frequency, voice breadth, normalized PMI, and whole-bigram reference lift",
                 "movement": "plain normalized percentage change across recent 13 weeks versus the preceding 13; smoothed log-ratio used only for ranking",
-                "topic_method": "phrase-aware atomic replay; aboutness-gated words and qualified bigrams in one composition/context graph; weighted modularity",
+                "topic_method": "phrase-aware atomic replay; current or recently established bigrams; aboutness-gated words; composition/context graph; standalone candidates and weighted modularity share one adaptive relevance ranking",
                 "circles": "weighted participant overlap across origin channels",
                 "topic_series_unit": "member-filtered non-overlapping semantic-unit mentions per 10k words",
                 "external_baseline": "not connected yet",

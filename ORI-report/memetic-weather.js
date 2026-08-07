@@ -26,7 +26,9 @@
 
   const PALETTE = [
     "#6dd9ff", "#927cff", "#e779ff", "#63f3cd", "#ff8ebc", "#ffd166",
-    "#5ca8ff", "#b8f06a", "#ff8c69", "#72e0f4", "#c59bff", "#62d6a9"
+    "#5ca8ff", "#b8f06a", "#ff8c69", "#72e0f4", "#c59bff", "#62d6a9",
+    "#ffb454", "#81a1ff", "#f17cbd", "#8be0a0", "#d3a6ff", "#55c8b8",
+    "#ff9f83", "#a8c7ff"
   ];
 
   class MemeticWeather {

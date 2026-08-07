@@ -600,7 +600,7 @@ function initializeTimeline(report) {
     topics: report.topics,
     days: report.days,
     labelFor: topicName,
-    palette: Array.from({ length: 12 }, (_unused, index) => `var(--chart-${index})`),
+    palette: Array.from({ length: 20 }, (_unused, index) => `var(--chart-${index})`),
     onSelect: index => {
       window.memeticWeather.time = index;
       window.memeticWeather.playing = false;

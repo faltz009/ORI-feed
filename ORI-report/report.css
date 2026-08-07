@@ -41,6 +41,14 @@
   --chart-9: #72e0f4;
   --chart-10: #c59bff;
   --chart-11: #62d6a9;
+  --chart-12: #ffb454;
+  --chart-13: #81a1ff;
+  --chart-14: #f17cbd;
+  --chart-15: #8be0a0;
+  --chart-16: #d3a6ff;
+  --chart-17: #55c8b8;
+  --chart-18: #ff9f83;
+  --chart-19: #a8c7ff;
 }
 /* Light mode: ORI paper — white page, ring colors (blue/purple/red/yellow/green) as ink. */
 :root[data-theme="light"] {
@@ -73,6 +81,14 @@
   --chart-9: #0b90b3;
   --chart-10: #8a5cd6;
   --chart-11: #1d9c69;
+  --chart-12: #b56800;
+  --chart-13: #4e67c8;
+  --chart-14: #b84c89;
+  --chart-15: #398f52;
+  --chart-16: #8150bb;
+  --chart-17: #278878;
+  --chart-18: #c45638;
+  --chart-19: #5076b9;
 }
 :root[data-theme="light"] body:before {
   opacity: 0.055;

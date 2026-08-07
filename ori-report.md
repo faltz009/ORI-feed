@@ -159,7 +159,7 @@ The following cannot become published language features:
 - conversational scaffolding such as generic agreement and turn-taking words;
 - explicit review exclusions from `ORI-report/config.json`.
 
-The explicit exclusion list currently contains `lol` and `lmao`. This list is
+The explicit exclusion list currently contains `lol`, `lmao`, and `ppl`. This list is
 the inspectable human-review layer for language that a general statistical rule
 cannot classify according to the product's purpose.
 
@@ -222,7 +222,18 @@ the community's detected topical language?
 A word may become a weather unit when it has at least 5 uses, 2 voices, no more
 than 150 broad-web occurrences per million words, and at least 3 times its
 broad rate—or no reference match. A bigram must first pass the construction
-rules, then have at least 5 uses, 3 voices, and observations on 2 dates.
+rules and occur on at least 2 dates. It then enters weather through either:
+
+- current adoption: at least 5 uses and 3 voices; or
+- established construction: at least 10 uses in the recent 13-week layer,
+  at least 3 recorded voices, and at least 100 times its broad-web phrase rate
+  (or no baseline match), while still meeting the current construction table's
+  3-use and 2-voice minimum.
+
+The established route is recomputed from canonical history every day. It is
+not a persistent phrase dictionary. It lets a strongly local construction such
+as `observer theory` remain atomic as its current pressure ebbs, without giving
+the same privilege to a long-lived ordinary phrase such as `many things`.
 
 After phrase discovery, the reducer replays the current window with qualified
 bigrams as atomic units. A matched `observer theory` claims those two token
@@ -239,6 +250,27 @@ Atomic units are connected through two kinds of observed relation:
 Observed-context edges need at least 2 message documents and normalized
 association of at least 0.12. Only each unit's strongest seven edges survive.
 Deterministic weighted modularity partitions that graph into topic families.
+An otherwise eligible unit with no accepted edge remains a singleton family;
+absence of a detected relationship no longer deletes its lexical evidence.
+
+Connected and singleton families use the same internal relevance measure:
+
+```text
+unit relevance = log(1 + uses)
+               × log(1 + voices)
+               × (1 + min(8, log2(local lift)))
+```
+
+For a multi-unit family, its strongest unit receives full weight and each
+additional related unit contributes one quarter of its relevance. This keeps a
+large cluster of generic bridge words from defeating a compact, distinctive
+front merely by containing more nodes. Raw mention frequency still controls
+particle pressure after selection.
+
+The visible inventory keeps families scoring at least 30% of that server's
+strongest family, up to a 20-family rendering ceiling. A young or quiet server
+therefore does not get padded with weak singleton words, while a busy server is
+not forced into the former fixed twelve-family limit.
 
 The 3D cloud renders those same units and edges. Bigrams are therefore real
 nodes, not labels painted over a separate word-only model. When a phrase and a

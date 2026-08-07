@@ -10,7 +10,13 @@ BASE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(BASE))
 
 from build import validate_output
-from weather import ReferenceData, WeatherAnalyzer, candidate_ngram_spans, token_stream
+from weather import (
+    TOPIC_RENDERING_CEILING,
+    ReferenceData,
+    WeatherAnalyzer,
+    candidate_ngram_spans,
+    token_stream,
+)
 
 
 CONFIG = {
@@ -275,11 +281,167 @@ class WeatherTests(unittest.TestCase):
         self.assertFalse(units["theory"]["label_visible"])
 
     def test_explicit_internet_lingo_blacklist_applies_everywhere(self):
-        config = {**CONFIG, "exclude_words": ["lol", "lmao"]}
+        config = {**CONFIG, "exclude_words": ["lol", "lmao", "ppl"]}
         analyzer = WeatherAnalyzer(30, config)
         analyzer.member_alias_tokens = set()
         self.assertFalse(analyzer.reportable_word("lol"))
         self.assertFalse(analyzer.reportable_word("lmao"))
+        self.assertFalse(analyzer.reportable_word("ppl"))
+
+    def test_conversational_scaffolding_cannot_become_weather(self):
+        analyzer = WeatherAnalyzer(30, CONFIG)
+        reference = ReferenceData(words={}, bigrams={})
+        for word in (
+            "seen", "saw", "situation", "situations", "push", "pushed",
+            "pushing", "tend", "tends", "heard", "mentioned",
+        ):
+            with self.subTest(word=word):
+                self.assertFalse(analyzer.aboutness_word(word, reference))
+
+    def test_established_bigram_stays_atomic_as_current_pressure_ebbs(self):
+        analyzer = WeatherAnalyzer(30, CONFIG)
+        reference = ReferenceData(words={}, bigrams={})
+        start = datetime(2026, 4, 1, tzinfo=timezone.utc)
+
+        # Earlier observations establish the literal construction across the
+        # same recent-history layer already used by Language Movement.
+        for index in range(8):
+            speaker = f"history-{index % 3}"
+            analyzer.observe(
+                content="observer theory",
+                timestamp=(start + timedelta(days=index)).isoformat(),
+                channel="general",
+                speaker=speaker,
+                reactions=[],
+                attachments=[],
+                current=False,
+            )
+
+        current_messages = [
+            ("u1", "observer theory"),
+            ("u2", "observer theory"),
+            ("u1", "observer theory"),
+        ]
+        for index, (speaker, content) in enumerate(current_messages):
+            analyzer.observe(
+                content=content,
+                timestamp=(start + timedelta(days=70 + index)).isoformat(),
+                channel="general",
+                speaker=speaker,
+                reactions=[],
+                attachments=[],
+            )
+
+        self.semantic_pass(analyzer, reference, current_messages)
+        self.assertIn("observer theory", analyzer.semantic_bigrams)
+        self.assertEqual(analyzer.semantic_counts["observer theory"], 3)
+        self.assertNotIn("observer", analyzer.semantic_counts)
+        self.assertNotIn("theory", analyzer.semantic_counts)
+
+    def test_common_long_lived_bigram_does_not_receive_relaxed_weather_gate(self):
+        config = {
+            **CONFIG,
+            "topic_bigram_minimum_count": 5,
+            "topic_bigram_minimum_speakers": 3,
+        }
+        analyzer = WeatherAnalyzer(30, config)
+        start = datetime(2026, 4, 1, tzinfo=timezone.utc)
+        for index in range(9):
+            analyzer.observe(
+                content="many things",
+                timestamp=(start + timedelta(days=index)).isoformat(),
+                channel="general",
+                speaker=f"history-{index % 3}",
+                reactions=[],
+                attachments=[],
+                current=False,
+            )
+        current_messages = [
+            ("u1", "many things"),
+            ("u2", "many things"),
+            ("u1", "many things"),
+        ]
+        for index, (speaker, content) in enumerate(current_messages):
+            analyzer.observe(
+                content=content,
+                timestamp=(start + timedelta(days=70 + index)).isoformat(),
+                channel="general",
+                speaker=speaker,
+                reactions=[],
+                attachments=[],
+            )
+        analyzer.member_alias_tokens = set()
+        reference = ReferenceData(
+            words={},
+            bigrams={"many things": 1, "other phrase": 19},
+        )
+        phrases = analyzer.phrase_rows(2, reference)
+        self.assertIn("many things", {row["term"] for row in phrases})
+        analyzer.begin_semantic_pass(phrases)
+        self.assertNotIn("many things", analyzer.semantic_bigrams)
+
+    def test_topic_inventory_has_a_hard_visual_ceiling(self):
+        analyzer = WeatherAnalyzer(30, CONFIG)
+        messages = []
+        for offset in range(25):
+            term = f"term{chr(ord('a') + offset)}"
+            messages.extend((("u1", term), ("u2", term)))
+        for index, (speaker, content) in enumerate(messages):
+            analyzer.observe(
+                content=content,
+                timestamp=(
+                    datetime(2026, 7, 1, tzinfo=timezone.utc)
+                    + timedelta(hours=index)
+                ).isoformat(),
+                channel="general",
+                speaker=speaker,
+                reactions=[],
+                attachments=[],
+            )
+        reference = ReferenceData(words={}, bigrams={})
+        analyzer.member_alias_tokens = set()
+        analyzer.begin_semantic_pass(analyzer.phrase_rows(2, reference))
+        for index, (speaker, content) in enumerate(messages):
+            analyzer.observe_semantic(
+                content=content,
+                timestamp=(
+                    datetime(2026, 7, 1, tzinfo=timezone.utc)
+                    + timedelta(hours=index)
+                ).isoformat(),
+                channel="general",
+                speaker=speaker,
+            )
+        report = analyzer.finalize(
+            reference,
+            server={"id": "guild", "name": "Test"},
+            coverage={},
+        )
+        self.assertEqual(len(report["topics"]), TOPIC_RENDERING_CEILING)
+
+    def test_disconnected_eligible_word_can_compete_as_a_topic(self):
+        analyzer = WeatherAnalyzer(30, CONFIG)
+        messages = [("u1", "psyop"), ("u2", "psyop")]
+        for index, (speaker, content) in enumerate(messages):
+            analyzer.observe(
+                content=content,
+                timestamp=f"2026-07-{index + 1:02d}T00:00:00+00:00",
+                channel="general",
+                speaker=speaker,
+                reactions=[],
+                attachments=[],
+            )
+        reference = ReferenceData(words={}, bigrams={})
+        self.semantic_pass(analyzer, reference, messages)
+        report = analyzer.finalize(
+            reference,
+            server={"id": "guild", "name": "Test"},
+            coverage={},
+        )
+        self.assertIn("psyop", {
+            unit["term"]
+            for topic in report["topics"]
+            for unit in topic["units"]
+        })
 
     def test_common_bigrams_need_local_lift(self):
         analyzer = WeatherAnalyzer(30, CONFIG)

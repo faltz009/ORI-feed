@@ -17,6 +17,6 @@
   "topic_minimum_lift": 3.0,
   "topic_resolution": 1.15,
   "conversation_resolution": 1.25,
-  "exclude_words": ["lol", "lmao"],
+  "exclude_words": ["lol", "lmao", "ppl"],
   "exclude_phrases": []
 }
