@@ -1,8 +1,8 @@
 {
- "generated": "2026-09-27T11:02:20Z",
+ "generated": "2026-09-28T12:21:35Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 2,
+ "message_count": 4,
  "channels_skipped_no_access": 3,
  "servers": [
   {
@@ -211,22 +211,65 @@
   {
    "user": "Hazor",
    "message": "",
-   "timestamp": "2026-09-27T07:11:56.441000+00:00",
+   "timestamp": "2026-09-27T23:00:43.151000+00:00",
    "channel": "✍️walter-log",
    "channel_id": "discord:1392675564074176744",
    "thread": null,
    "thread_id": null,
    "reply_to": null,
-   "id": "discord:1553665481259622430",
+   "id": "discord:1553904249187082272",
    "user_id": "discord:95614482352439296",
    "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1553665481259622430",
+   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1553904249187082272",
    "attachments": [
     {
      "name": "image.png",
-     "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1553665480827346944/image.png?ex=6aba133c&is=6ab8c1bc&hm=783f52d24a108af461bb93e84d9e2ec80ed8738f42dffbb563061ed359d40afc&",
-     "bytes": 281734,
-     "file": "feed/media/1553665480827346944-image.png"
+     "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1553904249094676560/image.png?ex=6abb9a5b&is=6aba48db&hm=939961aa5bf10251128c5a021c63616b96deb8384201879a50e59c305e9de640&",
+     "bytes": 265710,
+     "file": "feed/media/1553904249094676560-image.png"
+    }
+   ],
+   "platform": "discord",
+   "server": "ORI (est. 2025)",
+   "server_id": "discord:1344300408893345863"
+  },
+  {
+   "user": "Hazor",
+   "message": "@sasenchal check it out how it's going!",
+   "timestamp": "2026-09-27T23:00:58.102000+00:00",
+   "channel": "✍️walter-log",
+   "channel_id": "discord:1392675564074176744",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1553904311895982222",
+   "user_id": "discord:95614482352439296",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1553904311895982222",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI (est. 2025)",
+   "server_id": "discord:1344300408893345863"
+  },
+  {
+   "user": "Hazor",
+   "message": "",
+   "timestamp": "2026-09-27T23:02:33.552000+00:00",
+   "channel": "✍️walter-log",
+   "channel_id": "discord:1392675564074176744",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1553904712242438165",
+   "user_id": "discord:95614482352439296",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1553904712242438165",
+   "attachments": [
+    {
+     "name": "Shannon-to-geometry.webm",
+     "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1553904711781056613/Shannon-to-geometry.webm?ex=6abb9ac9&is=6aba4949&hm=35b1d52f6d32cdc53ea995b0bb7b03cee6111f1b464a33b0eb2770dd0a7fb1d5&",
+     "bytes": 703495,
+     "file": "feed/media/1553904711781056613-Shannon-to-geometry.webm"
     }
    ],
    "platform": "discord",
@@ -236,22 +279,22 @@
   {
    "user": "Hazor",
    "message": "",
-   "timestamp": "2026-09-27T07:18:45.993000+00:00",
+   "timestamp": "2026-09-27T23:32:43.373000+00:00",
    "channel": "✍️walter-log",
    "channel_id": "discord:1392675564074176744",
    "thread": null,
    "thread_id": null,
    "reply_to": null,
-   "id": "discord:1553667199044947970",
+   "id": "discord:1553912303181889679",
    "user_id": "discord:95614482352439296",
    "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1553667199044947970",
+   "url": "https://discord.com/channels/1344300408893345863/1392675564074176744/1553912303181889679",
    "attachments": [
     {
-     "name": "image.png",
-     "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1553667198994612234/image.png?ex=6aba14d5&is=6ab8c355&hm=3dc70cf8d00a10ffd55bbe719644d6bad91ca6b3083e0104cc35e097cf0574ff&",
-     "bytes": 323404,
-     "file": "feed/media/1553667198994612234-image.png"
+     "name": "continuous-discrete.webm",
+     "url": "https://cdn.discordapp.com/attachments/1392675564074176744/1553912302946885773/continuous-discrete.webm?ex=6abba1db&is=6aba505b&hm=e706346d5c0fe6abc6b7af2b539a0d745cdd46253ba5c492a6530294ef8a6374&",
+     "bytes": 555162,
+     "file": "feed/media/1553912302946885773-continuous-discrete.webm"
     }
    ],
    "platform": "discord",
