@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-01T12:04:35Z",
+ "generated": "2026-10-02T11:35:08Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 0,
+ "message_count": 2,
  "channels_skipped_no_access": 3,
  "servers": [
   {
@@ -209,5 +209,42 @@
    }
   }
  ],
- "messages": []
+ "messages": [
+  {
+   "user": "Hephaistos Fnord",
+   "message": "\"weird parasocial ideas\"?",
+   "timestamp": "2026-10-01T16:10:56.787000+00:00",
+   "channel": "general",
+   "channel_id": "discord:1344300408893345866",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1555250677964472341",
+   "user_id": "discord:266055440306143232",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1555250677964472341",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI (est. 2025)",
+   "server_id": "discord:1344300408893345863"
+  },
+  {
+   "user": "Tim",
+   "message": "I got tricked into running a malicious .exe! If my account contacted you since 12:30pm yesterday to download a game, please let me know. Trying to track down all affected people and inform them.",
+   "timestamp": "2026-10-02T09:59:21.683000+00:00",
+   "channel": "✝️🌅tiantmin-log",
+   "channel_id": "discord:1344689281293221950",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1555519553386184766",
+   "user_id": "discord:177129656611373056",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344689281293221950/1555519553386184766",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI (est. 2025)",
+   "server_id": "discord:1344300408893345863"
+  }
+ ]
 }
