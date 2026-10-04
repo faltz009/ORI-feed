@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-03T10:49:19Z",
+ "generated": "2026-10-04T11:31:16Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 1,
+ "message_count": 0,
  "channels_skipped_no_access": 3,
  "servers": [
   {
@@ -209,24 +209,5 @@
    }
   }
  ],
- "messages": [
-  {
-   "user": "sasenchal",
-   "message": "What is parasocial?",
-   "timestamp": "2026-10-02T19:16:23.896000+00:00",
-   "channel": "general",
-   "channel_id": "discord:1344300408893345866",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1555659736307728495",
-   "user_id": "discord:1250084478152478773",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1555659736307728495",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI (est. 2025)",
-   "server_id": "discord:1344300408893345863"
-  }
- ]
+ "messages": []
 }
