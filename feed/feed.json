@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-12T13:53:40Z",
+ "generated": "2026-10-13T13:10:55Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 2,
+ "message_count": 0,
  "channels_skipped_no_access": 3,
  "servers": [
   {
@@ -209,48 +209,5 @@
    }
   }
  ],
- "messages": [
-  {
-   "user": "Kattt",
-   "message": "https://x.com/calco_io/status/2108320556047372703?s=46&t=I0FhJGPwj5CwrfpEAq1ufw",
-   "timestamp": "2026-10-11T18:25:49.665000+00:00",
-   "channel": "kattt-log",
-   "channel_id": "discord:1425960592195321907",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1558908500611043441",
-   "user_id": "discord:1024417977111691305",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1425960592195321907/1558908500611043441",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863",
-   "reactions": [
-    {
-     "emoji": "🔥",
-     "count": 1
-    }
-   ]
-  },
-  {
-   "user": "Kattt",
-   "message": "cool stuff",
-   "timestamp": "2026-10-11T18:25:57.084000+00:00",
-   "channel": "kattt-log",
-   "channel_id": "discord:1425960592195321907",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1558908531728584749",
-   "user_id": "discord:1024417977111691305",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1425960592195321907/1558908531728584749",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  }
- ]
+ "messages": []
 }
