@@ -1,9 +1,9 @@
 {
- "generated": "2026-10-16T10:21:14Z",
+ "generated": "2026-10-17T09:54:44Z",
  "window_hours": 24,
  "all_history": false,
  "message_count": 0,
- "channels_skipped_no_access": 3,
+ "channels_skipped_no_access": 4,
  "servers": [
   {
    "name": "ORI 1.0",
@@ -202,7 +202,7 @@
     "zzbbyy"
    ],
    "coverage": {
-    "targets": 86,
+    "targets": 87,
     "public_archived_threads": 0,
     "private_archived_threads": 0,
     "private_archived_scope": "joined_only"
