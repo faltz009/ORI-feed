@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-17T09:54:44Z",
+ "generated": "2026-10-18T10:06:05Z",
  "window_hours": 24,
  "all_history": false,
  "message_count": 0,
@@ -203,7 +203,7 @@
    ],
    "coverage": {
     "targets": 87,
-    "public_archived_threads": 0,
+    "public_archived_threads": 1,
     "private_archived_threads": 0,
     "private_archived_scope": "joined_only"
    }
