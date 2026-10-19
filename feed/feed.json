@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-18T10:06:05Z",
+ "generated": "2026-10-19T11:33:55Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 0,
+ "message_count": 1,
  "channels_skipped_no_access": 4,
  "servers": [
   {
@@ -202,12 +202,44 @@
     "zzbbyy"
    ],
    "coverage": {
-    "targets": 87,
-    "public_archived_threads": 1,
+    "targets": 86,
+    "public_archived_threads": 0,
     "private_archived_threads": 0,
     "private_archived_scope": "joined_only"
    }
   }
  ],
- "messages": []
+ "messages": [
+  {
+   "user": "Kattt",
+   "message": "@here One of our own is performing very well in the ongoing ice poseidon competition! \n\nToday, he is even on the top 3 board, meaning we can expect for him to show up on the main stream a lot\n\n\n\nYou can follow the competition online by searching “Safezone Ice Poseidon” on your favorite platform, or watching the streams here\n\nIce Poseidon: \nhttps://kick.com/iceposeidon\n\n@Ματταθίας: https://kick.com/mathyouf\n\n\nAnd he also shows up a lot on my stream BUT as mentioned he is on the board today, so I encourage you to watch and/or support his stream to help boost him in the game",
+   "timestamp": "2026-10-18T17:07:02.190000+00:00",
+   "channel": "general",
+   "channel_id": "discord:1344300408893345866",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1561425387203076258",
+   "user_id": "discord:1024417977111691305",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1561425387203076258",
+   "attachments": [
+    {
+     "name": "IMG_1529.png",
+     "url": "https://cdn.discordapp.com/attachments/1344300408893345866/1561425386296971414/IMG_1529.png?ex=6ad6f6f5&is=6ad5a575&hm=283b96d79849366047de900b2b5b66fa80ec7fbe15fe076d1fa857a879b1c15e&",
+     "bytes": 337820,
+     "file": "feed/media/1561425386296971414-IMG_1529.png"
+    }
+   ],
+   "platform": "discord",
+   "server": "ORI 1.0",
+   "server_id": "discord:1344300408893345863",
+   "reactions": [
+    {
+     "emoji": "🔥",
+     "count": 2
+    }
+   ]
+  }
+ ]
 }
