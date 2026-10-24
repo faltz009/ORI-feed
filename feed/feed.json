@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-23T10:43:16Z",
+ "generated": "2026-10-24T10:00:27Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 1,
+ "message_count": 0,
  "channels_skipped_no_access": 4,
  "servers": [
   {
@@ -210,67 +210,5 @@
    }
   }
  ],
- "messages": [
-  {
-   "user": "Ματταθίας",
-   "message": "New meme format about to blow up invest early",
-   "timestamp": "2026-10-22T15:54:23.534000+00:00",
-   "channel": "🧙🔬ματταθίας-log",
-   "channel_id": "discord:1505588498596630751",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1562856657137049652",
-   "user_id": "discord:548031734810411021",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1505588498596630751/1562856657137049652",
-   "attachments": [
-    {
-     "name": "HVL-6GxXgAEsoE4.jpg",
-     "url": "https://cdn.discordapp.com/attachments/1505588498596630751/1562856652984680591/HVL-6GxXgAEsoE4.jpg?ex=6adc2bee&is=6adada6e&hm=26f6e08e3f0570099592256548b1f4602ac8e911388f892a3d3311c93099831c&",
-     "bytes": 59702,
-     "file": "feed/media/1562856652984680591-HVL-6GxXgAEsoE4.jpg"
-    },
-    {
-     "name": "HVL-6HdWIAAPlmD.jpg",
-     "url": "https://cdn.discordapp.com/attachments/1505588498596630751/1562856653647511704/HVL-6HdWIAAPlmD.jpg?ex=6adc2bee&is=6adada6e&hm=36df9f3377dd5f4d4f5533d0fde83138fcb03facb60a949e0ba27c89e65d3fc2&",
-     "bytes": 102033,
-     "file": "feed/media/1562856653647511704-HVL-6HdWIAAPlmD.jpg"
-    },
-    {
-     "name": "HVBObUoWUAAJLnW.jpg",
-     "url": "https://cdn.discordapp.com/attachments/1505588498596630751/1562856654259622078/HVBObUoWUAAJLnW.jpg?ex=6adc2bee&is=6adada6e&hm=9ad87f0ef4f370d1bb04c39856107699171707b5998fe26f2f79977c14a10db6&",
-     "bytes": 104793,
-     "file": "feed/media/1562856654259622078-HVBObUoWUAAJLnW.jpg"
-    },
-    {
-     "name": "HVPlkocXkAA9UAI.jpg",
-     "url": "https://cdn.discordapp.com/attachments/1505588498596630751/1562856654968725524/HVPlkocXkAA9UAI.jpg?ex=6adc2bef&is=6adada6f&hm=2652e09305a6faf3f8cc91b406f539f244df438cf2eb75283268f9a2f5432069&",
-     "bytes": 96685,
-     "file": "feed/media/1562856654968725524-HVPlkocXkAA9UAI.jpg"
-    },
-    {
-     "name": "HVPlj5mXUAEoeHM.jpg",
-     "url": "https://cdn.discordapp.com/attachments/1505588498596630751/1562856655459450900/HVPlj5mXUAEoeHM.jpg?ex=6adc2bef&is=6adada6f&hm=6f09d9f1262a323f76e39d948e0ca13cbb7094c88d9216b4e5f438f6e7dc0b33&",
-     "bytes": 88506,
-     "file": "feed/media/1562856655459450900-HVPlj5mXUAEoeHM.jpg"
-    },
-    {
-     "name": "HVPNwQpXUAErm4L.jpg",
-     "url": "https://cdn.discordapp.com/attachments/1505588498596630751/1562856656117960857/HVPNwQpXUAErm4L.jpg?ex=6adc2bef&is=6adada6f&hm=695a335af0f576c5c87556c8a3ef35505d9d3ee9368c1007824bab6c804b69a3&",
-     "bytes": 122767,
-     "file": "feed/media/1562856656117960857-HVPNwQpXUAErm4L.jpg"
-    },
-    {
-     "name": "HVN7kEnaUAAI7yR.jpg",
-     "url": "https://cdn.discordapp.com/attachments/1505588498596630751/1562856656843579473/HVN7kEnaUAAI7yR.jpg?ex=6adc2bef&is=6adada6f&hm=f24d365a4eadcaf20038daae8323818b237ff695663e4d0b00ab29b236fd8c03&",
-     "bytes": 61113,
-     "file": "feed/media/1562856656843579473-HVN7kEnaUAAI7yR.jpg"
-    }
-   ],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  }
- ]
+ "messages": []
 }
