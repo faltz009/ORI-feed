@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-26T11:52:13Z",
+ "generated": "2026-10-27T11:16:39Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 5,
+ "message_count": 1,
  "channels_skipped_no_access": 4,
  "servers": [
   {
@@ -207,99 +207,6 @@
   }
  ],
  "messages": [
-  {
-   "user": "identity",
-   "message": "https://x.com/abenitezburraco/status/2114589450357379508?s=20",
-   "timestamp": "2026-10-26T05:41:44.848000+00:00",
-   "channel": "✍️eval-log",
-   "channel_id": "discord:1409673828673523762",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1564152031495585803",
-   "user_id": "discord:335107602243518466",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1409673828673523762/1564152031495585803",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "identity",
-   "message": "",
-   "timestamp": "2026-10-26T06:02:24.374000+00:00",
-   "channel": "✍️eval-log",
-   "channel_id": "discord:1409673828673523762",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1564157230444711976",
-   "user_id": "discord:335107602243518466",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1409673828673523762/1564157230444711976",
-   "attachments": [
-    {
-     "name": "Screenshot_20261026-065450_Brave.png",
-     "url": "https://cdn.discordapp.com/attachments/1409673828673523762/1564157229970497616/Screenshot_20261026-065450_Brave.png?ex=6ae03e70&is=6adeecf0&hm=8bafdd02ec92aa32f79dae6e442d8644348e017e5637e2ec7aa8f6812f103561&",
-     "bytes": 98354,
-     "file": "feed/media/1564157229970497616-Screenshot_20261026-065450_Brave.png"
-    }
-   ],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "identity",
-   "message": "",
-   "timestamp": "2026-10-26T06:02:27.924000+00:00",
-   "channel": "✍️eval-log",
-   "channel_id": "discord:1409673828673523762",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1564157245334495232",
-   "user_id": "discord:335107602243518466",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1409673828673523762/1564157245334495232",
-   "attachments": [
-    {
-     "name": "Screenshot_20261026-065503_Brave.png",
-     "url": "https://cdn.discordapp.com/attachments/1409673828673523762/1564157245095411842/Screenshot_20261026-065503_Brave.png?ex=6ae03e73&is=6adeecf3&hm=6e509a44b5f9eb9856221600ace87b21af01b14a2b89bed33ccac0760d8e86b0&",
-     "bytes": 109221,
-     "file": "feed/media/1564157245095411842-Screenshot_20261026-065503_Brave.png"
-    }
-   ],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "identity",
-   "message": "",
-   "timestamp": "2026-10-26T06:02:29.469000+00:00",
-   "channel": "✍️eval-log",
-   "channel_id": "discord:1409673828673523762",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1564157251814432899",
-   "user_id": "discord:335107602243518466",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1409673828673523762/1564157251814432899",
-   "attachments": [
-    {
-     "name": "Screenshot_20261026-065545_Brave.png",
-     "url": "https://cdn.discordapp.com/attachments/1409673828673523762/1564157251453718568/Screenshot_20261026-065545_Brave.png?ex=6ae03e75&is=6adeecf5&hm=70e2a3f3599bf90fe7351c39bb917b76cffe9397c5dbcb5cfdf477e86359be4c&",
-     "bytes": 277500,
-     "file": "feed/media/1564157251453718568-Screenshot_20261026-065545_Brave.png"
-    }
-   ],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  },
   {
    "user": "Shadow_Rebbe",
    "message": "Lol. It will. Everyone is sure they are the abused",
