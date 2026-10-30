@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-29T11:59:00Z",
+ "generated": "2026-10-30T11:52:36Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 4,
+ "message_count": 0,
  "channels_skipped_no_access": 4,
  "servers": [
   {
@@ -204,78 +204,5 @@
    }
   }
  ],
- "messages": [
-  {
-   "user": "Kattt",
-   "message": "the com is insane…",
-   "timestamp": "2026-10-29T02:08:18.295000+00:00",
-   "channel": "💼omar-log",
-   "channel_id": "discord:1489295743855493312",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": "discord:1564791625295724686",
-   "id": "discord:1565185480516182037",
-   "user_id": "discord:1024417977111691305",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1489295743855493312/1565185480516182037",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "Kattt",
-   "message": "i know about them",
-   "timestamp": "2026-10-29T02:08:21.870000+00:00",
-   "channel": "💼omar-log",
-   "channel_id": "discord:1489295743855493312",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1565185495510556783",
-   "user_id": "discord:1024417977111691305",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1489295743855493312/1565185495510556783",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "Kattt",
-   "message": "i’ve met some people/groups adjacent to them too, they’re actually malicious and crazy idk…",
-   "timestamp": "2026-10-29T02:08:46.715000+00:00",
-   "channel": "💼omar-log",
-   "channel_id": "discord:1489295743855493312",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1565185599718039694",
-   "user_id": "discord:1024417977111691305",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1489295743855493312/1565185599718039694",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "Kattt",
-   "message": "like “pros and cons” ofc but in general the com + successionary movements (like o9a and 764 etc) are so anti social",
-   "timestamp": "2026-10-29T02:09:18.452000+00:00",
-   "channel": "💼omar-log",
-   "channel_id": "discord:1489295743855493312",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1565185732832792619",
-   "user_id": "discord:1024417977111691305",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1489295743855493312/1565185732832792619",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  }
- ]
+ "messages": []
 }
