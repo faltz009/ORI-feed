@@ -1,9 +1,9 @@
 {
- "generated": "2026-11-15T13:09:55Z",
+ "generated": "2026-11-16T14:18:17Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 0,
- "channels_skipped_no_access": 4,
+ "message_count": 1,
+ "channels_skipped_no_access": 3,
  "servers": [
   {
    "name": "ORI 1.0",
@@ -197,12 +197,37 @@
     "zzbbyy"
    ],
    "coverage": {
-    "targets": 86,
+    "targets": 85,
     "public_archived_threads": 0,
     "private_archived_threads": 0,
     "private_archived_scope": "joined_only"
    }
   }
  ],
- "messages": []
+ "messages": [
+  {
+   "user": "Shadow_Rebbe",
+   "message": "https://shadowrebbe.substack.com/p/epistemics-memetics-and-cybernetics?utm_source=share&utm_medium=android&r=4rbax",
+   "timestamp": "2026-11-15T15:48:01.469000+00:00",
+   "channel": "🤡☠️ben-g-log",
+   "channel_id": "discord:1483070936667131945",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1571552363414691900",
+   "user_id": "discord:849747845536022548",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1483070936667131945/1571552363414691900",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0",
+   "server_id": "discord:1344300408893345863",
+   "reactions": [
+    {
+     "emoji": "🔥",
+     "count": 1
+    }
+   ]
+  }
+ ]
 }
