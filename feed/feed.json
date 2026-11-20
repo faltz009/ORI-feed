@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-19T14:55:20Z",
+ "generated": "2026-11-20T14:35:50Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 0,
+ "message_count": 3,
  "channels_skipped_no_access": 3,
  "servers": [
   {
@@ -207,5 +207,66 @@
    }
   }
  ],
- "messages": []
+ "messages": [
+  {
+   "user": "Benjamin Isaac",
+   "message": "Okay it has come to my attention that this place was locked down. As of now anyone in here can post, and I'm in charge. Go nuts, ya filthy animals. This is our space now.",
+   "timestamp": "2026-11-19T23:09:09.469000+00:00",
+   "channel": "general",
+   "channel_id": "discord:1344300408893345866",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1573112929715232911",
+   "user_id": "discord:1004926447313498122",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1573112929715232911",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0",
+   "server_id": "discord:1344300408893345863"
+  },
+  {
+   "user": "Kattt",
+   "message": "i’m going crazy!",
+   "timestamp": "2026-11-20T05:02:01.701000+00:00",
+   "channel": "general",
+   "channel_id": "discord:1344300408893345866",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": "discord:1573112929715232911",
+   "id": "discord:1573201732492726333",
+   "user_id": "discord:1024417977111691305",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1573201732492726333",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0",
+   "server_id": "discord:1344300408893345863",
+   "reactions": [
+    {
+     "emoji": "👀",
+     "count": 1
+    }
+   ]
+  },
+  {
+   "user": "Benjamin Isaac",
+   "message": "elaborate?",
+   "timestamp": "2026-11-20T05:38:11.806000+00:00",
+   "channel": "general",
+   "channel_id": "discord:1344300408893345866",
+   "thread": null,
+   "thread_id": null,
+   "reply_to": null,
+   "id": "discord:1573210834572812299",
+   "user_id": "discord:1004926447313498122",
+   "is_bot": false,
+   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1573210834572812299",
+   "attachments": [],
+   "platform": "discord",
+   "server": "ORI 1.0",
+   "server_id": "discord:1344300408893345863"
+  }
+ ]
 }
