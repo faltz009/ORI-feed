@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-26T16:01:41Z",
+ "generated": "2026-11-27T15:50:07Z",
  "window_hours": 24,
  "all_history": false,
- "message_count": 4,
+ "message_count": 0,
  "channels_skipped_no_access": 0,
  "servers": [
   {
@@ -207,78 +207,5 @@
    }
   }
  ],
- "messages": [
-  {
-   "user": "seon",
-   "message": "it feels as if ORI could become a really good psyop or \"advanced marketing\" detection facility",
-   "timestamp": "2026-11-26T14:19:33.829000+00:00",
-   "channel": "general",
-   "channel_id": "discord:1344300408893345866",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1575516368080470102",
-   "user_id": "discord:1039561042256203837",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1575516368080470102",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "seon",
-   "message": "but no one really has the resources to do that",
-   "timestamp": "2026-11-26T14:19:39.862000+00:00",
-   "channel": "general",
-   "channel_id": "discord:1344300408893345866",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1575516393384714342",
-   "user_id": "discord:1039561042256203837",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1575516393384714342",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "seon",
-   "message": "Different from stuff that bellingcat does",
-   "timestamp": "2026-11-26T14:20:11.358000+00:00",
-   "channel": "general",
-   "channel_id": "discord:1344300408893345866",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1575516525488640173",
-   "user_id": "discord:1039561042256203837",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1575516525488640173",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  },
-  {
-   "user": "seon",
-   "message": "mostly because a lot of the large data scraping tools are still locked off",
-   "timestamp": "2026-11-26T14:20:30.678000+00:00",
-   "channel": "general",
-   "channel_id": "discord:1344300408893345866",
-   "thread": null,
-   "thread_id": null,
-   "reply_to": null,
-   "id": "discord:1575516606522462309",
-   "user_id": "discord:1039561042256203837",
-   "is_bot": false,
-   "url": "https://discord.com/channels/1344300408893345863/1344300408893345866/1575516606522462309",
-   "attachments": [],
-   "platform": "discord",
-   "server": "ORI 1.0",
-   "server_id": "discord:1344300408893345863"
-  }
- ]
+ "messages": []
 }
